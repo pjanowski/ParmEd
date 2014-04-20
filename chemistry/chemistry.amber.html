@@ -1,0 +1,1698 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>chemistry.amber package &mdash; ParmEd 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ParmEd 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">ParmEd 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="chemistry-amber-package">
+<h1>chemistry.amber package<a class="headerlink" href="#chemistry-amber-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+</div>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-chemistry.amber.asciicrd">
+<span id="chemistry-amber-asciicrd-module"></span><h2>chemistry.amber.asciicrd module<a class="headerlink" href="#module-chemistry.amber.asciicrd" title="Permalink to this headline">¶</a></h2>
+<p>This is a pure-python module for reading and writing ASCII Amber structure
+files, like trajectories and restarts.  Because it is pure-python and
+formatted-ASCII, parsing and writing these files are expected to be slow. Binary
+alternatives (like DCD and NetCDF, provided in netcdffiles.py) are strongly
+encouraged, but these are provided for more complete compatibility and for
+instances where the prequisites may not be installed.</p>
+<dl class="class">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.asciicrd.</tt><tt class="descname">AmberAsciiRestart</tt><big>(</big><em>fname</em>, <em>mode='r'</em>, <em>natom=0</em>, <em>hasbox=None</em>, <em>title=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.asciicrd._AmberAsciiCoordinateFile</span></tt></p>
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart.CRDS_PER_LINE">
+<tt class="descname">CRDS_PER_LINE</tt><em class="property"> = 6</em><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart.CRDS_PER_LINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart.DEFAULT_TITLE">
+<tt class="descname">DEFAULT_TITLE</tt><em class="property"> = 'restart created by ParmEd'</em><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart.DEFAULT_TITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart.box">
+<tt class="descname">box</tt><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Combined cell lengths and cell angles</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart.cell_angles">
+<tt class="descname">cell_angles</tt><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart.cell_angles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart.cell_lengths">
+<tt class="descname">cell_lengths</tt><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart.cell_lengths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart.coordinates">
+<tt class="descname">coordinates</tt><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberAsciiRestart.velocities">
+<tt class="descname">velocities</tt><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart.velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.asciicrd.AmberMdcrd">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.asciicrd.</tt><tt class="descname">AmberMdcrd</tt><big>(</big><em>fname</em>, <em>natom</em>, <em>hasbox</em>, <em>mode='r'</em>, <em>title=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberMdcrd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.asciicrd._AmberAsciiCoordinateFile</span></tt></p>
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberMdcrd.CRDS_PER_LINE">
+<tt class="descname">CRDS_PER_LINE</tt><em class="property"> = 10</em><a class="headerlink" href="#chemistry.amber.asciicrd.AmberMdcrd.CRDS_PER_LINE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.asciicrd.AmberMdcrd.DEFAULT_TITLE">
+<tt class="descname">DEFAULT_TITLE</tt><em class="property"> = 'trajectory created by ParmEd'</em><a class="headerlink" href="#chemistry.amber.asciicrd.AmberMdcrd.DEFAULT_TITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.asciicrd.AmberMdcrd.add_box">
+<tt class="descname">add_box</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberMdcrd.add_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints &#8216;stuff&#8217; (which must be a 3-element list, array.array, tuple, or
+np.ndarray) as the box lengths for this frame</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.asciicrd.AmberMdcrd.add_coordinates">
+<tt class="descname">add_coordinates</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberMdcrd.add_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prints &#8216;stuff&#8217; (which must be either an iterable of 3*natom or have an
+attribute &#8216;flatten&#8217; that converts it into an iterable of 3*natom) to the
+open file handler. Can only be called on a &#8216;new&#8217; mdcrd</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.asciicrd.AmberMdcrd.box">
+<tt class="descname">box</tt><big>(</big><em>frame=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberMdcrd.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the frame&#8217;th frame of the box lengths as a length-3 array</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.asciicrd.AmberMdcrd.coordinates">
+<tt class="descname">coordinates</tt><big>(</big><em>frame=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberMdcrd.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the frame&#8217;th frame of the coordinates as a 3*natom-length array</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.amber.mask">
+<span id="chemistry-amber-mask-module"></span><h2>chemistry.amber.mask module<a class="headerlink" href="#module-chemistry.amber.mask" title="Permalink to this headline">¶</a></h2>
+<p>Module for evaluating Amber Mask strings and translating them into lists in
+which a selected atom is 1 and one that&#8217;s not is 0.</p>
+<dl class="class">
+<dt id="chemistry.amber.mask.AmberMask">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.mask.</tt><tt class="descname">AmberMask</tt><big>(</big><em>parm</em>, <em>mask</em><big>)</big><a class="headerlink" href="#chemistry.amber.mask.AmberMask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>What is hopefully a fully-fledged Amber mask parser implemented in Python.</p>
+<p>It currently lacks the capability to evaluate masks with distance criteria</p>
+<dl class="method">
+<dt id="chemistry.amber.mask.AmberMask.Selected">
+<tt class="descname">Selected</tt><big>(</big><em>invert=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.mask.AmberMask.Selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator that returns the indexes of selected atoms</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.mask.AmberMask.Selection">
+<tt class="descname">Selection</tt><big>(</big><em>prnlev=0</em>, <em>invert=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.mask.AmberMask.Selection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the mask and analyzes the result to return an atom
+selection array</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.amber.netcdffiles">
+<span id="chemistry-amber-netcdffiles-module"></span><h2>chemistry.amber.netcdffiles module<a class="headerlink" href="#module-chemistry.amber.netcdffiles" title="Permalink to this headline">¶</a></h2>
+<p>This module contains classes for reading and writing Amber NetCDF-style files,
+including both restarts and trajectories. These sets of classes abstract the
+interaction with the various NetCDF-Python APIs that are available, namely</p>
+<blockquote>
+<div><ul class="simple">
+<li>scipy</li>
+<li>netCDF4</li>
+<li>ScientificPython</li>
+<li>pynetcdf</li>
+</ul>
+</div></blockquote>
+<p>This module contains objects relevant to Amber NetCDF files. The code in
+chemistry/amber/__init__.py is responsible for selecting the API based on a
+default choice or user-selection (the latter is really only helpful for
+development to ensure that all packages work correctly&#8212;there is no difference
+from a user perspective). ALL NetCDF-file manipulation that the chemistry/amber
+package does should be contained in this module.</p>
+<dl class="class">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.netcdffiles.</tt><tt class="descname">NetCDFRestart</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class to read or write NetCDF restart files</p>
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.box">
+<tt class="descname">box</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.box" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.cell_angles">
+<tt class="descname">cell_angles</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.cell_angles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.cell_lengths">
+<tt class="descname">cell_lengths</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.cell_lengths" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.coordinates">
+<tt class="descname">coordinates</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.open_new">
+<em class="property">classmethod </em><tt class="descname">open_new</tt><big>(</big><em>fname</em>, <em>natom</em>, <em>box</em>, <em>vels</em>, <em>title=''</em>, <em>remd=None</em>, <em>temp=None</em>, <em>remd_indices=None</em>, <em>remd_groups=None</em>, <em>remd_dimtypes=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.open_new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a new NetCDF file and sets the attributes</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>fname (string): Name of the new file to open (overwritten)
+natom (int): Number of atoms in the restart
+box (bool): Write box information or not?
+vels (bool): Write velocities or not?
+title (string): title of the NetCDF file
+remd (string): Whether REMD information needs to be written. Can be</p>
+<blockquote>
+<div>None - No REMD information is written
+T(emperature) - Target temperature (or pH) will be written
+M(ulti-D) - remd_indices and remd_groups will be written</div></blockquote>
+<p>remd_dimtypes (int array): Array of exchange types for each group.</p>
+</div></blockquote>
+<p>remd is case-insensitive, and done based on first-letter matching, only</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.open_old">
+<em class="property">classmethod </em><tt class="descname">open_old</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.open_old" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the NetCDF file and sets the global attributes that the file sets</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.remd_dimtype">
+<tt class="descname">remd_dimtype</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.remd_dimtype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.remd_groups">
+<tt class="descname">remd_groups</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.remd_groups" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.remd_indices">
+<tt class="descname">remd_indices</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.remd_indices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.temp0">
+<tt class="descname">temp0</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.temp0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.time">
+<tt class="descname">time</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.velocities">
+<tt class="descname">velocities</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.netcdffiles.</tt><tt class="descname">NetCDFTraj</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class to read or write NetCDF restart files</p>
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.add_cell_lengths_angles">
+<tt class="descname">add_cell_lengths_angles</tt><big>(</big><em>lengths</em>, <em>angles=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.add_cell_lengths_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new cell length and angle frame to the end of a NetCDF
+trajectory.  This should only be called on objects created with the
+&#8220;open_new&#8221; constructor.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>lengths (array): This should be a 1-D array of 3 or 6 elements.</dt>
+<dd><p class="first last">If 6 elements, angles should be None and the first 3
+elements are the box lengths (angstroms) and the last 3
+are the box angles (degrees).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>angles (array): These are the box angles (if lengths contains</dt>
+<dd><p class="first last">only 3 elements) in degrees. Must be a 1-D array of 3
+elements or None if lengths includes angles as well.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.add_coordinates">
+<tt class="descname">add_coordinates</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.add_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new coordinate frame to the end of a NetCDF trajectory. This
+should only be called on objects created with the &#8220;open_new&#8221;
+constructor.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>stuff (array): This array of floats is converted into a numpy</dt>
+<dd><p class="first last">array of shape (natom, 3). It can be passed either in the
+2-D format of [ [x1, y1, z1], [x2, y2, z2], ... ] or in the
+1-D format of [x1, y1, z1, x2, y2, z2, ... ].</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.add_forces">
+<tt class="descname">add_forces</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.add_forces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new coordinate frame to the end of a NetCDF trajectory. This
+should only be called on objects created with the &#8220;open_new&#8221;
+constructor.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>stuff (array): This array of floats is converted into a numpy</dt>
+<dd><p class="first last">array of shape (natom, 3). It can be passed either in the
+2-D format of [ [x1, y1, z1], [x2, y2, z2], ... ] or in the
+1-D format of [x1, y1, z1, x2, y2, z2, ... ].</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.add_remd_indices">
+<tt class="descname">add_remd_indices</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.add_remd_indices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.add_temp0">
+<tt class="descname">add_temp0</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.add_temp0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.add_time">
+<tt class="descname">add_time</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.add_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.add_velocities">
+<tt class="descname">add_velocities</tt><big>(</big><em>stuff</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.add_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new velocities frame to the end of a NetCDF trajectory. This
+should only be called on objects created with the &#8220;open_new&#8221;
+constructor.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>stuff (array): This array of floats is converted into a numpy</dt>
+<dd><p class="first last">array of shape (natom, 3). It can be passed either in the
+2-D format of [ [x1, y1, z1], [x2, y2, z2], ... ] or in the
+1-D format of [x1, y1, z1, x2, y2, z2, ... ].</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.cell_lengths_angles">
+<tt class="descname">cell_lengths_angles</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.cell_lengths_angles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the cell lengths and cell angles of a particular frame in the
+trajectory</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>frame (int): Which snapshot to get (first snapshot is frame 0)</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>2-element tuple: (length-3 numpy array of cell lengths, length-3
+numpy array of cell angles)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.close">
+<tt class="descname">close</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes the NetCDF file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.coordinates">
+<tt class="descname">coordinates</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the coordinates of a particular frame in the trajectory</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>frame (int): Which snapshot to get (first snapshot is frame 0)</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>numpy array of length 3*natom with the given coordinates</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.forces">
+<tt class="descname">forces</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.forces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the forces of a particular frame in the trajectory</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>frame (int): Which snapshot to get (first snapshot is frame 0)</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>numpy array of length 3*atom with the given forces properly
+scaled to be of units amu*angstrom/picosecond^2</dd>
+</dl>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.open_new">
+<em class="property">classmethod </em><tt class="descname">open_new</tt><big>(</big><em>fname</em>, <em>natom</em>, <em>box</em>, <em>crds=True</em>, <em>vels=False</em>, <em>frcs=False</em>, <em>remd=None</em>, <em>remd_dimension=None</em>, <em>title=''</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.open_new" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens a new NetCDF file and sets the attributes</p>
+<p>Parameters:</p>
+<blockquote>
+<div><p>fname (string): Name of the new file to open (overwritten)
+natom (int): Number of atoms in the restart
+box (bool): Write box information or not?
+crds (bool): Write coordinates or not?
+vels (bool): Write velocities or not?
+frcs (bool): Write forces or not?
+remd (string): What kind of REMD are we doing. Allowed values are:</p>
+<blockquote>
+<div>None - No REMD
+T[emperature] - Temperature or Constant pH REMD
+M[ulti-D] - Multi-dimensional REMD</div></blockquote>
+<dl class="docutils">
+<dt>remd_dimension (int): Number of dimensions for multi-D REMD. None</dt>
+<dd>for non-multi-D REMD</dd>
+</dl>
+<p>title (string): title of the NetCDF file</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.open_old">
+<em class="property">classmethod </em><tt class="descname">open_old</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.open_old" title="Permalink to this definition">¶</a></dt>
+<dd><p>Opens the NetCDF file and sets the global attributes that the file sets</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>fname (string): File name of the trajectory to open. It must</dt>
+<dd><p class="first last">exist</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.remd_dimtype">
+<tt class="descname">remd_dimtype</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.remd_dimtype" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.remd_indices">
+<tt class="descname">remd_indices</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.remd_indices" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.temp0">
+<tt class="descname">temp0</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.temp0" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.time">
+<tt class="descname">time</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the time of a particular frame in the trajectory</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>frame (int): Which snapshot to get (first snapshot is frame 0)</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>float: time of the given frame</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.velocities">
+<tt class="descname">velocities</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the velocities of a particular frame in the trajectory</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>frame (int): Which snapshot to get (first snapshot is frame 0)</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>numpy array of length 3*atom with the given velocities properly
+scaled to be of units angstrom/picosecond</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="chemistry.amber.netcdffiles.needs_netcdf">
+<tt class="descclassname">chemistry.amber.netcdffiles.</tt><tt class="descname">needs_netcdf</tt><big>(</big><em>fcn</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.needs_netcdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator to protect against functions that need NetCDF so we can provide
+a helpful error message</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.amber.openmmloader">
+<span id="chemistry-amber-openmmloader-module"></span><h2>chemistry.amber.openmmloader module<a class="headerlink" href="#module-chemistry.amber.openmmloader" title="Permalink to this headline">¶</a></h2>
+<p>This module contains classes that can serve as a drop-in replacement for the
+Amber file reading classes provided by OpenMM for creating an OpenMM System
+for performing simulations.</p>
+<p>It also pulls the box information from the restart file instead of the topology
+file.</p>
+<dl class="class">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmloader.</tt><tt class="descname">OpenMMAmberParm</tt><big>(</big><em>prm_name=None</em>, <em>rst7_name=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber._amberparm.AmberParm</span></tt></p>
+<p>OpenMM-compatible subclass of AmberParm. This object should still work with
+the ParmEd API while also being compatible with OpenMM&#8217;s environment</p>
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.ANGLE_FORCE_GROUP">
+<tt class="descname">ANGLE_FORCE_GROUP</tt><em class="property"> = 1</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.ANGLE_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.BOND_FORCE_GROUP">
+<tt class="descname">BOND_FORCE_GROUP</tt><em class="property"> = 0</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.BOND_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.DIHEDRAL_FORCE_GROUP">
+<tt class="descname">DIHEDRAL_FORCE_GROUP</tt><em class="property"> = 2</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.DIHEDRAL_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.GB_FORCE_GROUP">
+<tt class="descname">GB_FORCE_GROUP</tt><em class="property"> = 3</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.GB_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.NONBONDED_FORCE_GROUP">
+<tt class="descname">NONBONDED_FORCE_GROUP</tt><em class="property"> = 3</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.NONBONDED_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.box_lengths">
+<tt class="descname">box_lengths</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.box_lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of 3 units</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.box_vectors">
+<tt class="descname">box_vectors</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.box_vectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of box vectors</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.createSystem">
+<tt class="descname">createSystem</tt><big>(</big><em>nonbondedMethod=NoCutoff</em>, <em>nonbondedCutoff=Quantity(value=1.0</em>, <em>unit=nanometer)</em>, <em>constraints=None</em>, <em>rigidWater=True</em>, <em>implicitSolvent=None</em>, <em>implicitSolventKappa=None</em>, <em>implicitSolventSaltConc=Quantity(value=0.0</em>, <em>unit=mole/liter)</em>, <em>temperature=Quantity(value=298.15</em>, <em>unit=kelvin)</em>, <em>soluteDielectric=1.0</em>, <em>solventDielectric=78.5</em>, <em>removeCMMotion=True</em>, <em>hydrogenMass=None</em>, <em>ewaldErrorTolerance=0.0005</em>, <em>flexibleConstraints=True</em>, <em>verbose=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.createSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an OpenMM System representing the topology described by the
+prmtop file.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>nonbondedMethod (object=NoCutoff) The method to use for nonbonded</dt>
+<dd><p class="first last">interactions. Allowed values are NoCutoff, CutoffNonPeriodic,
+CutoffPeriodic, Ewald, or PME.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nonbondedCutoff (distance=1*nanometer) The cutoff distance to use</dt>
+<dd><p class="first last">for nonbonded interactions.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>constraints (object=None) Specifies which bonds or angles should be</dt>
+<dd><p class="first last">implemented with constraints. Allowed values are None, HBonds,
+AllBonds, or HAngles.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>rigidWater (boolean=True) If true, water molecules will be fully</dt>
+<dd><p class="first last">rigid regardless of the value passed for the constraints argument</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolvent (object=None) If not None, the implicit solvent</dt>
+<dd><p class="first last">model to use. Allowed values are HCT, OBC1, OBC2, or GBn</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolventKappa (float=None): Debye screening parameter to</dt>
+<dd><p class="first last">model salt concentrations in GB solvent.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolventSaltConc (float=0.0*u.moles/u.liter): Salt</dt>
+<dd><p class="first last">concentration for GB simulations. Converted to Debye length
+<a href="#id1"><span class="problematic" id="id2">`</span></a>kappa&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>temperature (float=298.15*u.kelvin): Temperature used in the salt</dt>
+<dd><p class="first last">concentration-to-kappa conversion for GB salt concentration term</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>soluteDielectric (float=1.0) The solute dielectric constant to use</dt>
+<dd><p class="first last">in the implicit solvent model.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>solventDielectric (float=78.5) The solvent dielectric constant to</dt>
+<dd><p class="first last">use in the implicit solvent model.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>removeCMMotion (boolean=True) If true, a CMMotionRemover will be</dt>
+<dd><p class="first last">added to the System.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>hydrogenMass (mass=None) The mass to use for hydrogen atoms bound to</dt>
+<dd><p class="first last">heavy atoms. Any mass added to a hydrogen is subtracted from the
+heavy atom to keep their total mass the same.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ewaldErrorTolerance (float=0.0005) The error tolerance to use if the</dt>
+<dd><p class="first last">nonbonded method is Ewald or PME.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">flexibleConstraints (bool=True) Are our constraints flexible or not?</p>
+</li>
+<li><p class="first">verbose (bool=False) Optionally prints out a running progress report</p>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.openmm_14_LJ">
+<tt class="descname">openmm_14_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.openmm_14_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the radii and depths for the LJ interactions between 1-4 pairs.
+For Amber topology files this is the same as the normal LJ parameters,
+but is done here so that OpenMMChamberParm can inherit and override this
+behavior without having to duplicate all of the system creation code.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.openmm_LJ">
+<tt class="descname">openmm_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.openmm_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as fill_LJ, except it uses 0.5 for the LJ radius for H-atoms with
+no vdW parameters (per OpenMM&#8217;s standard)</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>list, list <span class="classifier-delimiter">:</span> <span class="classifier">The 1st list is the list of all Rmin/2 terms. The</span></dt>
+<dd>2nd is the list of all epsilon (or well depth) terms.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.positions">
+<tt class="descname">positions</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the cached positions or create new ones from the atoms</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.system">
+<tt class="descname">system</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the cached system class &#8211; it needs to be initialized via
+&#8220;createSystem&#8221; first!</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.topology">
+<tt class="descname">topology</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>The OpenMM Topology object. Cached when possible, but any changes to the
+topology object lists results in the topology being deleted and rebuilt</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMAmberParm.velocities">
+<tt class="descname">velocities</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as for positions, but for velocities</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmloader.</tt><tt class="descname">OpenMMChamberParm</tt><big>(</big><em>prm_name=None</em>, <em>rst7_name=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber._chamberparm.ChamberParm</span></tt>, <a class="reference internal" href="#chemistry.amber.openmmloader.OpenMMAmberParm" title="chemistry.amber.openmmloader.OpenMMAmberParm"><tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.openmmloader.OpenMMAmberParm</span></tt></a></p>
+<p>OpenMM-compatible subclass of AmberParm. This object should still work with
+the ParmEd API while also being compatible with OpenMM&#8217;s environment</p>
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.ANGLE_FORCE_GROUP">
+<tt class="descname">ANGLE_FORCE_GROUP</tt><em class="property"> = 1</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.ANGLE_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.BOND_FORCE_GROUP">
+<tt class="descname">BOND_FORCE_GROUP</tt><em class="property"> = 0</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.BOND_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.CMAP_FORCE_GROUP">
+<tt class="descname">CMAP_FORCE_GROUP</tt><em class="property"> = 5</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.CMAP_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.DIHEDRAL_FORCE_GROUP">
+<tt class="descname">DIHEDRAL_FORCE_GROUP</tt><em class="property"> = 2</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.DIHEDRAL_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.GB_FORCE_GROUP">
+<tt class="descname">GB_FORCE_GROUP</tt><em class="property"> = 6</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.GB_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.IMPROPER_FORCE_GROUP">
+<tt class="descname">IMPROPER_FORCE_GROUP</tt><em class="property"> = 4</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.IMPROPER_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.NONBONDED_FORCE_GROUP">
+<tt class="descname">NONBONDED_FORCE_GROUP</tt><em class="property"> = 6</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.NONBONDED_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.UREY_BRADLEY_FORCE_GROUP">
+<tt class="descname">UREY_BRADLEY_FORCE_GROUP</tt><em class="property"> = 3</em><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.UREY_BRADLEY_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.createSystem">
+<tt class="descname">createSystem</tt><big>(</big><em>nonbondedMethod=NoCutoff</em>, <em>nonbondedCutoff=Quantity(value=1.0</em>, <em>unit=nanometer)</em>, <em>constraints=None</em>, <em>rigidWater=True</em>, <em>implicitSolvent=None</em>, <em>implicitSolventKappa=None</em>, <em>implicitSolventSaltConc=Quantity(value=0.0</em>, <em>unit=mole/liter)</em>, <em>temperature=Quantity(value=298.15</em>, <em>unit=kelvin)</em>, <em>soluteDielectric=1.0</em>, <em>solventDielectric=78.5</em>, <em>removeCMMotion=True</em>, <em>hydrogenMass=None</em>, <em>ewaldErrorTolerance=0.0005</em>, <em>flexibleConstraints=True</em>, <em>verbose=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.createSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an OpenMM System representing the topology described by the
+prmtop file.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>nonbondedMethod (object=NoCutoff) The method to use for nonbonded</dt>
+<dd><p class="first last">interactions. Allowed values are NoCutoff, CutoffNonPeriodic,
+CutoffPeriodic, Ewald, or PME.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nonbondedCutoff (distance=1*nanometer) The cutoff distance to use</dt>
+<dd><p class="first last">for nonbonded interactions.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>constraints (object=None) Specifies which bonds or angles should be</dt>
+<dd><p class="first last">implemented with constraints. Allowed values are None, HBonds,
+AllBonds, or HAngles.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>rigidWater (boolean=True) If true, water molecules will be fully</dt>
+<dd><p class="first last">rigid regardless of the value passed for the constraints argument</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolvent (object=None) If not None, the implicit solvent</dt>
+<dd><p class="first last">model to use. Allowed values are HCT, OBC1, OBC2, or GBn</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolventKappa (float=None): Debye screening parameter to</dt>
+<dd><p class="first last">model salt concentrations in GB solvent.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolventSaltConc (float=0.0*u.moles/u.liter): Salt</dt>
+<dd><p class="first last">concentration for GB simulations. Converted to Debye length
+<a href="#id3"><span class="problematic" id="id4">`</span></a>kappa&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>temperature (float=298.15*u.kelvin): Temperature used in the salt</dt>
+<dd><p class="first last">concentration-to-kappa conversion for GB salt concentration term</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>soluteDielectric (float=1.0) The solute dielectric constant to use</dt>
+<dd><p class="first last">in the implicit solvent model.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>solventDielectric (float=78.5) The solvent dielectric constant to</dt>
+<dd><p class="first last">use in the implicit solvent model.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>removeCMMotion (boolean=True) If true, a CMMotionRemover will be</dt>
+<dd><p class="first last">added to the System.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>hydrogenMass (mass=None) The mass to use for hydrogen atoms bound to</dt>
+<dd><p class="first last">heavy atoms. Any mass added to a hydrogen is subtracted from the
+heavy atom to keep their total mass the same.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ewaldErrorTolerance (float=0.0005) The error tolerance to use if the</dt>
+<dd><p class="first last">nonbonded method is Ewald or PME.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">flexibleConstraints (bool=True) Are our constraints flexible or not?</p>
+</li>
+<li><p class="first">verbose (bool=False) Optionally prints out a running progress report</p>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmloader.OpenMMChamberParm.openmm_14_LJ">
+<tt class="descname">openmm_14_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.openmm_14_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as fill_14_LJ, except it uses 0.5 for the LJ radius for H-atoms
+with no vdW parameters (per OpenMM&#8217;s standard)</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>list, list <span class="classifier-delimiter">:</span> <span class="classifier">The 1st list is the list of all Rmin/2 terms. The</span></dt>
+<dd>2nd is the list of all epsilon (or well depth) terms.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.openmmloader.OpenMMRst7">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmloader.</tt><tt class="descname">OpenMMRst7</tt><big>(</big><em>filename=None</em>, <em>natom=None</em>, <em>title=''</em>, <em>hasvels=False</em>, <em>hasbox=False</em>, <em>time=0.0</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMRst7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber._amberparm.Rst7</span></tt></p>
+<p>Contains positions and maybe velocities and box information from a restart
+file using OpenMM data structures</p>
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMRst7.box_lengths">
+<tt class="descname">box_lengths</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMRst7.box_lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of floats</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMRst7.box_vectors">
+<tt class="descname">box_vectors</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMRst7.box_vectors" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of box vectors</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMRst7.positions">
+<tt class="descname">positions</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMRst7.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Positions as a sequence of Vec3 objects with angstrom units</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.openmmloader.OpenMMRst7.velocities">
+<tt class="descname">velocities</tt><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMRst7.velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as positions, but for velocities</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.amber.openmmreporters">
+<span id="chemistry-amber-openmmreporters-module"></span><h2>chemistry.amber.openmmreporters module<a class="headerlink" href="#module-chemistry.amber.openmmreporters" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="chemistry.amber.openmmreporters.AmberStateDataReporter">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">AmberStateDataReporter</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.AmberStateDataReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>This class acts as a state data reporter for OpenMM simulations, but it is a
+little more generalized. Notable differences are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>It allows the units of the output to be specified, with defaults being
+those used in Amber (e.g., kcal/mol, angstroms^3, etc.)</li>
+<li>It will write to any object containing a &#8216;write&#8217; method; not just
+files. This allows, for instance, writing to a GUI window that
+implements the desired &#8216;write&#8217; attribute.</li>
+</ul>
+</div></blockquote>
+<p>Most of this code is copied from the OpenMM StateDataReporter class, with
+the above-mentioned changes made.</p>
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.AmberStateDataReporter.describeNextReport">
+<tt class="descname">describeNextReport</tt><big>(</big><em>simulation</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.AmberStateDataReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about the next report this object will generate.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>A five element tuple.  The first element is the number of steps
+until the next report.  The remaining elements specify whether that
+report will require positions, velocities, forces, and energies
+respectively.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.AmberStateDataReporter.report">
+<tt class="descname">report</tt><big>(</big><em>simulation</em>, <em>state</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.AmberStateDataReporter.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a report.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+<li>state (State) The current state of the simulation</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.openmmreporters.EnergyMinimizerReporter">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">EnergyMinimizerReporter</tt><big>(</big><em>f</em>, <em>volume=False</em>, <em>energyUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;amount&quot;)</em>, <em>name=&quot;mole&quot;</em>, <em>symbol=&quot;mol&quot;): -1.0</em>, <em>ScaledUnit(factor=4.184</em>, <em>master=kilojoule</em>, <em>name='kilocalorie'</em>, <em>symbol='kcal'): 1.0})</em>, <em>volumeUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;length&quot;)</em>, <em>name=&quot;angstrom&quot;</em>, <em>symbol=&quot;A&quot;): 3.0})</em>, <em>densityUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;mass&quot;)</em>, <em>name=&quot;gram&quot;</em>, <em>symbol=&quot;g&quot;): 1.0</em>, <em>ScaledUnit(factor=0.001</em>, <em>master=decimeter**3</em>, <em>name='milliliter'</em>, <em>symbol='mL'): -1.0</em>, <em>BaseUnit(base_dim=BaseDimension(&quot;amount&quot;)</em>, <em>name=&quot;item&quot;</em>, <em>symbol=&quot;&quot;): -1.0})</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.EnergyMinimizerReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistry.amber.openmmreporters.AmberStateDataReporter" title="chemistry.amber.openmmreporters.AmberStateDataReporter"><tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.openmmreporters.AmberStateDataReporter</span></tt></a></p>
+<p>This class acts as a simple energy reporter class for minimizations. This
+is not meant to be used as a reporter for OpenMM&#8217;s molecular dynamics
+routines, but instead passed a simulation object for printing out
+single-point energies.</p>
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.EnergyMinimizerReporter.describeNextReport">
+<tt class="descname">describeNextReport</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.EnergyMinimizerReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disable this reporter inside MD</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.EnergyMinimizerReporter.report">
+<tt class="descname">report</tt><big>(</big><em>simulation</em>, <em>frame=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.EnergyMinimizerReporter.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print out the current energy</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.openmmreporters.MdcrdReporter">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">MdcrdReporter</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.MdcrdReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>MdcrdReporter prints a trajectory in ASCII Amber format. This reporter will
+be significantly slower than binary file reporters (like DCDReporter or
+NetCDFReporter).</p>
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.MdcrdReporter.describeNextReport">
+<tt class="descname">describeNextReport</tt><big>(</big><em>simulation</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.MdcrdReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about the next report this object will generate.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>A five element tuple.  The first element is the number of steps
+until the next report.  The remaining elements specify whether that
+report will require positions, velocities, forces, and energies
+respectively.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.MdcrdReporter.report">
+<tt class="descname">report</tt><big>(</big><em>simulation</em>, <em>state</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.MdcrdReporter.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a report.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+<li>state (State) The current state of the simulation</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.openmmreporters.NetCDFReporter">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">NetCDFReporter</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.NetCDFReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>NetCDFReporter prints a trajectory in NetCDF format</p>
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.NetCDFReporter.describeNextReport">
+<tt class="descname">describeNextReport</tt><big>(</big><em>simulation</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.NetCDFReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about the next report this object will generate.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>A five element tuple.  The first element is the number of steps
+until the next report.  The remaining elements specify whether that
+report will require positions, velocities, forces, and energies
+respectively.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.NetCDFReporter.report">
+<tt class="descname">report</tt><big>(</big><em>simulation</em>, <em>state</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.NetCDFReporter.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a report.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+<li>state (State) The current state of the simulation</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.openmmreporters.ProgressReporter">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">ProgressReporter</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.ProgressReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistry.amber.openmmreporters.AmberStateDataReporter" title="chemistry.amber.openmmreporters.AmberStateDataReporter"><tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.openmmreporters.AmberStateDataReporter</span></tt></a></p>
+<p>A class that prints out a progress report of how much MD (or minimization)
+has been done, how fast the simulation is running, and how much time is left
+(similar to the mdinfo file in Amber)</p>
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.ProgressReporter.describeNextReport">
+<tt class="descname">describeNextReport</tt><big>(</big><em>simulation</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.ProgressReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about the next report this object will generate.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+</ul>
+</dd>
+<dt>Returns: A five element tuple.  The first element is the number of steps</dt>
+<dd>until the next report.  The remaining elements specify whether that
+report will require positions, velocities, forces, and energies
+respectively.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.ProgressReporter.report">
+<tt class="descname">report</tt><big>(</big><em>simulation</em>, <em>state</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.ProgressReporter.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a report and predict the time to completion (and
+current/overall MD performance)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.openmmreporters.RestartReporter">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">RestartReporter</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.RestartReporter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Use a reporter to handle writing restarts at specified intervals.</p>
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.RestartReporter.describeNextReport">
+<tt class="descname">describeNextReport</tt><big>(</big><em>simulation</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.RestartReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get information about the next report this object will generate.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>A five element tuple.  The first element is the number of steps
+until the next report.  The remaining elements specify whether that
+report will require positions, velocities, forces, and energies
+respectively.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.RestartReporter.report">
+<tt class="descname">report</tt><big>(</big><em>simulation</em>, <em>state</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.RestartReporter.report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a report.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>simulation (Simulation) The Simulation to generate a report for</li>
+<li>state (State) The current state of the simulation</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="chemistry.amber.openmmreporters.needs_openmm">
+<tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">needs_openmm</tt><big>(</big><em>fcn</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.needs_openmm" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.amber.readparm">
+<span id="chemistry-amber-readparm-module"></span><h2>chemistry.amber.readparm module<a class="headerlink" href="#module-chemistry.amber.readparm" title="Permalink to this headline">¶</a></h2>
+<p>This module is simply a namespace for all Amber topology-like classes. There are
+different variants; for instance the standard Amber topology, the chamber-made
+topology, and the tinker_to_amber-made topology. These classes are all defined
+in their own private modules, but imported here to simplify the API.</p>
+<p>Copyright (C) 2010 - 2014  Jason Swails</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330,
+Boston, MA 02111-1307, USA.</p>
+<dl class="class">
+<dt id="chemistry.amber.readparm.AmberFormat">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.readparm.</tt><tt class="descname">AmberFormat</tt><big>(</big><em>fname=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Generalization of the AmberParm class without some of the assumptions made
+about Amber topology files specifically</p>
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.AmberFormat.CHARGE_SCALE">
+<tt class="descname">CHARGE_SCALE</tt><em class="property"> = 18.2223</em><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.CHARGE_SCALE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberFormat.addFlag">
+<tt class="descname">addFlag</tt><big>(</big><em>flag_name</em>, <em>flag_format</em>, <em>data=None</em>, <em>num_items=-1</em>, <em>comments=</em>, <span class="optional">[</span><span class="optional">]</span><em>after=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.addFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a new flag with the given flag name and Fortran format string and
+initializes the array with the values given, or as an array of 0s
+of length num_items</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first docutils">
+<dt>flag_name (str): Name of the flag to insert. It is converted to all</dt>
+<dd>upper case</dd>
+</dl>
+<p>flag_format (str): Fortran Format statement (do NOT enclose in ())
+data (list): Sequence with data for the new flag. If None, a list</p>
+<blockquote>
+<div>of zeros of length num_items is given as a holder</div></blockquote>
+<dl class="docutils">
+<dt>num_items (int): Number of items in the section (only used if data</dt>
+<dd>is None)</dd>
+</dl>
+<p>comments (list): List of comments to put in this section
+after (str): If not None, this flag will be added after the given</p>
+<blockquote class="last">
+<div>flag. If the &#8216;after&#8217; flag does not exist, IndexError is
+raised.</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberFormat.deleteFlag">
+<tt class="descname">deleteFlag</tt><big>(</big><em>flag_name</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.deleteFlag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a flag from the topology file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberFormat.rdparm">
+<tt class="descname">rdparm</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.rdparm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parses the Amber format file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberFormat.rdparm_old">
+<tt class="descname">rdparm_old</tt><big>(</big><em>prmtop_lines</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.rdparm_old" title="Permalink to this definition">¶</a></dt>
+<dd><p>This reads an old-style topology file and stores the results in the
+same data structures as a new-style topology file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberFormat.set_version">
+<tt class="descname">set_version</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.set_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the version string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberFormat.view">
+<tt class="descname">view</tt><big>(</big><em>cls</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.view" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a view of the current object as another object.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><dl class="first last docutils">
+<dt>cls Class definition of an AmberParm subclass for the current</dt>
+<dd>object to be converted into</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>instance of cls initialized from data in this object. This is NOT a
+deep copy, so modifying the original object may modify this. The
+copy function will create a deep copy of any AmberFormat-derived
+object</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberFormat.writeParm">
+<tt class="descname">writeParm</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.writeParm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the current data in parm_data into a new topology file with
+the given name</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.readparm.AmberParm">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.readparm.</tt><tt class="descname">AmberParm</tt><big>(</big><em>prm_name=None</em>, <em>rst7_name=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.amberformat.AmberFormat</span></tt></p>
+<p>Amber Topology (parm7 format) class. Gives low, and some high, level access
+to topology data.</p>
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.LoadPointers">
+<tt class="descname">LoadPointers</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.LoadPointers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the data in POINTERS section into a pointers dictionary with each
+key being the pointer name according to <a class="reference external" href="http://ambermd.org/formats.html">http://ambermd.org/formats.html</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.LoadRst7">
+<tt class="descname">LoadRst7</tt><big>(</big><em>rst7</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.LoadRst7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads coordinates into the AmberParm class</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.ToMolecule">
+<tt class="descname">ToMolecule</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.ToMolecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates an amber system into a molecule format</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.AmberParm.amoeba">
+<tt class="descname">amoeba</tt><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.amoeba" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.AmberParm.chamber">
+<tt class="descname">chamber</tt><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.chamber" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.combine_epsilon">
+<tt class="descname">combine_epsilon</tt><big>(</big><em>eps1</em>, <em>eps2</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.combine_epsilon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the combining rule for Epsilon</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.combine_rmin">
+<tt class="descname">combine_rmin</tt><big>(</big><em>rmin1</em>, <em>rmin2</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.combine_rmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define the combining rule for Rmin</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.delete_mask">
+<tt class="descname">delete_mask</tt><big>(</big><em>mask</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.delete_mask" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes all of the atoms corresponding to an entire mask</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.fill_14_LJ">
+<tt class="descname">fill_14_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.fill_14_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the LJ_14_radius, LJ_14_depth arrays with data (LJ_types is
+identical) from LENNARD_JONES_14_ACOEF and LENNARD_JONES_14_BCOEF
+sections of the prmtop files, by undoing the canonical combining rules.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.fill_LJ">
+<tt class="descname">fill_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.fill_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the LJ_radius, LJ_depth arrays and LJ_types dictionary with data
+from LENNARD_JONES_ACOEF and LENNARD_JONES_BCOEF sections of the prmtop
+files, by undoing the canonical combining rules.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.flush_data_changes">
+<tt class="descname">flush_data_changes</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.flush_data_changes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all of the topology instance variables. This is necessary if we
+actually want to modify the topological layout of our system
+(like deleting atoms)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.initialize_topology">
+<tt class="descname">initialize_topology</tt><big>(</big><em>rst7_name=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.initialize_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes topology data structures, like the list of atoms, bonds,
+etc., after the topology file has been read.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.load_coordinates">
+<tt class="descname">load_coordinates</tt><big>(</big><em>coords</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.load_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the coordinates into the atom list</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.amber.readparm.AmberParm.load_from_rawdata">
+<em class="property">classmethod </em><tt class="descname">load_from_rawdata</tt><big>(</big><em>rawdata</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.load_from_rawdata" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take the raw data from a AmberFormat object and initialize an AmberParm
+from that data.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>rawdata (AmberFormat): Already has a parsed file</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>Populated AmberParm instance</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.load_velocities">
+<tt class="descname">load_velocities</tt><big>(</big><em>vels</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.load_velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the coordinates into the atom list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.ptr">
+<tt class="descname">ptr</tt><big>(</big><em>pointer</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.ptr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the value of the given pointer, and converts to upper-case so
+it&#8217;s case-insensitive. A non-existent pointer meets with a KeyError</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.recalculate_14_LJ">
+<tt class="descname">recalculate_14_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.recalculate_14_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the values of the LJ_radius and LJ_depth arrays and recalculates
+the LENNARD_JONES_A/BCOEF topology sections from the canonical combining
+rules for the 1-4 LJ interactions (CHAMBER only)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.recalculate_LJ">
+<tt class="descname">recalculate_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.recalculate_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the values of the LJ_radius and LJ_depth arrays and recalculates
+the LENNARD_JONES_A/BCOEF topology sections from the canonical combining
+rules.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.rediscover_molecules">
+<tt class="descname">rediscover_molecules</tt><big>(</big><em>solute_ions=True</em>, <em>fix_broken=True</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.rediscover_molecules" title="Permalink to this definition">¶</a></dt>
+<dd><p>This determines the molecularity and sets the ATOMS_PER_MOLECULE and
+SOLVENT_POINTERS sections of the prmtops. Returns the new atom sequence
+in terms of the &#8216;old&#8217; atom indexes if re-ordering was necessary to fix
+the tleap bug. Returns None otherwise.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.remake_parm">
+<tt class="descname">remake_parm</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.remake_parm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-fills the topology file arrays if we have changed the underlying
+structure</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.AmberParm.solvent_residues">
+<tt class="descname">solvent_residues</tt><em class="property"> = ['WAT', 'HOH']</em><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.solvent_residues" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.writeOFF">
+<tt class="descname">writeOFF</tt><big>(</big><em>off_file='off.lib'</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.writeOFF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes an OFF file from all of the residues found in a prmtop</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.writeParm">
+<tt class="descname">writeParm</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.writeParm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the current data in parm_data into a new topology file with a
+given name.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.AmberParm.writeRst7">
+<tt class="descname">writeRst7</tt><big>(</big><em>name</em>, <em>netcdf=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberParm.writeRst7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a restart file with the current coordinates and velocities and
+box info if it&#8217;s present</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.readparm.ChamberParm">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.readparm.</tt><tt class="descname">ChamberParm</tt><big>(</big><em>prm_name=None</em>, <em>rst7_name=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber._amberparm.AmberParm</span></tt></p>
+<p>Chamber Topology (parm7 format) class. Gives low, and some high, level
+access to topology data.</p>
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.ChamberParm.CHARGE_SCALE">
+<tt class="descname">CHARGE_SCALE</tt><em class="property"> = 18.222831832621406</em><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.CHARGE_SCALE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.LoadPointers">
+<tt class="descname">LoadPointers</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.LoadPointers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads the data in POINTERS section into a pointers dictionary with each
+key being the pointer name according to <a class="reference external" href="http://ambermd.org/formats.html">http://ambermd.org/formats.html</a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.ToMolecule">
+<tt class="descname">ToMolecule</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.ToMolecule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Translates an amber system into a molecule format</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.ChamberParm.amoeba">
+<tt class="descname">amoeba</tt><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.amoeba" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.ChamberParm.chamber">
+<tt class="descname">chamber</tt><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.chamber" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.fill_LJ">
+<tt class="descname">fill_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.fill_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fills the LJ_radius, LJ_depth arrays and LJ_types dictionary with data
+from LENNARD_JONES_ACOEF and LENNARD_JONES_BCOEF sections of the prmtop
+files, by undoing the canonical combining rules.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.flush_data_changes">
+<tt class="descname">flush_data_changes</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.flush_data_changes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all of the topology instance variables. This is necessary if we
+actually want to modify the topological layout of our system
+(like deleting atoms)</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.ChamberParm.has_cmap">
+<tt class="descname">has_cmap</tt><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.has_cmap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.initialize_topology">
+<tt class="descname">initialize_topology</tt><big>(</big><em>rst7_name=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.initialize_topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Initializes topology data structures, like the list of atoms, bonds,
+etc., after the topology file has been read. The following methods are
+called:</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.recalculate_LJ">
+<tt class="descname">recalculate_LJ</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.recalculate_LJ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes the values of the LJ_radius and LJ_depth arrays and recalculates
+the LENNARD_JONES_A/BCOEF topology sections from the canonical
+combining rules.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.remake_parm">
+<tt class="descname">remake_parm</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.remake_parm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Re-fills the topology file arrays if we have changed the underlying
+structure</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.ChamberParm.writeOFF">
+<tt class="descname">writeOFF</tt><big>(</big><em>off_file='off.lib'</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.writeOFF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes an OFF file from all of the residues found in a prmtop</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="chemistry.amber.readparm.LoadParm">
+<tt class="descclassname">chemistry.amber.readparm.</tt><tt class="descname">LoadParm</tt><big>(</big><em>parmname</em>, <em>rst7name=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.LoadParm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads a topology file using the correct class.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd>parmname (str): The name of the topology file to load
+rst7name (str): The (optional) name of the restart file to load</dd>
+<dt>Returns:</dt>
+<dd>AmberParm or ChamberParm instance, depending on whether it is an Amber
+topology (i.e., created with LEaP) or a Chamber topology (i.e., created
+with chamber), respectively. If the restart file is not None, it will
+load the restart file into the parameter file</dd>
+</dl>
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.amber.readparm.Rst7">
+<em class="property">class </em><tt class="descclassname">chemistry.amber.readparm.</tt><tt class="descname">Rst7</tt><big>(</big><em>filename=None</em>, <em>natom=None</em>, <em>title=''</em>, <em>hasvels=False</em>, <em>hasbox=False</em>, <em>time=0.0</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.Rst7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Amber input coordinate (or restart coordinate) file. Front-end for the
+readers and writers, supports both NetCDF and ASCII restarts.</p>
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.Rst7.coords">
+<tt class="descname">coords</tt><a class="headerlink" href="#chemistry.amber.readparm.Rst7.coords" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated for coordinates now</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.amber.readparm.Rst7.copy_from">
+<em class="property">classmethod </em><tt class="descname">copy_from</tt><big>(</big><em>thing</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.Rst7.copy_from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies the coordinates, velocities, and box information from another
+instance</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.amber.readparm.Rst7.open">
+<em class="property">classmethod </em><tt class="descname">open</tt><big>(</big><em>filename</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.Rst7.open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor that opens and parses an input coordinate file</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.amber.readparm.Rst7.vels">
+<tt class="descname">vels</tt><a class="headerlink" href="#chemistry.amber.readparm.Rst7.vels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deprecated for velocities now</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.readparm.Rst7.write">
+<tt class="descname">write</tt><big>(</big><em>fname</em>, <em>netcdf=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.Rst7.write" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes the coordinates and/or velocities to a restart file</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-chemistry.amber"></span><p>Package that provides an API to Amber-specific files</p>
+<dl class="function">
+<dt id="chemistry.amber.open_netcdf">
+<tt class="descclassname">chemistry.amber.</tt><tt class="descname">open_netcdf</tt><big>(</big><em>name</em>, <em>mode</em><big>)</big><a class="headerlink" href="#chemistry.amber.open_netcdf" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="chemistry.amber.get_int_dimension">
+<tt class="descclassname">chemistry.amber.</tt><tt class="descname">get_int_dimension</tt><big>(</big><em>obj</em>, <em>name</em><big>)</big><a class="headerlink" href="#chemistry.amber.get_int_dimension" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="chemistry.amber.get_float">
+<tt class="descclassname">chemistry.amber.</tt><tt class="descname">get_float</tt><big>(</big><em>obj</em>, <em>name</em><big>)</big><a class="headerlink" href="#chemistry.amber.get_float" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">chemistry.amber package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-chemistry.amber.asciicrd">chemistry.amber.asciicrd module</a></li>
+<li><a class="reference internal" href="#module-chemistry.amber.mask">chemistry.amber.mask module</a></li>
+<li><a class="reference internal" href="#module-chemistry.amber.netcdffiles">chemistry.amber.netcdffiles module</a></li>
+<li><a class="reference internal" href="#module-chemistry.amber.openmmloader">chemistry.amber.openmmloader module</a></li>
+<li><a class="reference internal" href="#module-chemistry.amber.openmmreporters">chemistry.amber.openmmreporters module</a></li>
+<li><a class="reference internal" href="#module-chemistry.amber.readparm">chemistry.amber.readparm module</a></li>
+<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/chemistry.amber.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">ParmEd 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Jason Swails.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

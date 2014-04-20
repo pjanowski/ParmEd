@@ -1,0 +1,806 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>chemistry.charmm package &mdash; ParmEd 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="ParmEd 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">ParmEd 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="chemistry-charmm-package">
+<h1>chemistry.charmm package<a class="headerlink" href="#chemistry-charmm-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-chemistry.charmm.charmmcrds">
+<span id="chemistry-charmm-charmmcrds-module"></span><h2>chemistry.charmm.charmmcrds module<a class="headerlink" href="#module-chemistry.charmm.charmmcrds" title="Permalink to this headline">¶</a></h2>
+<p>Provides a class for parsing CHARMM-style coordinate files, namely CHARMM .crd
+(coordinate) files and CHARMM .rst (restart) file. Uses CharmmFile class in
+_charmmfile.py for reading files</p>
+<p>Author: Jason Deckman
+Contributors: Jason Swails
+Date: April 18, 2014</p>
+<dl class="class">
+<dt id="chemistry.charmm.charmmcrds.CharmmCrdFile">
+<em class="property">class </em><tt class="descclassname">chemistry.charmm.charmmcrds.</tt><tt class="descname">CharmmCrdFile</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.charmm.charmmcrds.CharmmCrdFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Reads and parses a CHARMM coordinate file (.crd) into its components,
+namely the coordinates, CHARMM atom types, resid, resname, etc.</p>
+<dl class="docutils">
+<dt>Main attributes:</dt>
+<dd><ul class="first last simple">
+<li>natom (int) : Number of atoms in the system</li>
+<li>resname (list) : Names of all residues</li>
+<li>coords (list) : All cartesian coordinates [x1, y1, z1, x2, ...]</li>
+</ul>
+</dd>
+</dl>
+<p>Example:
+&gt;&gt;&gt; chm = CharmmCrdFile(&#8216;testfiles/1tnm.crd&#8217;)
+&gt;&gt;&gt; print &#8216;%d atoms; %d coords&#8217; % (chm.natom, len(chm.coords))
+1414 atoms; 4242 coords</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.charmm.charmmcrds.CharmmRstFile">
+<em class="property">class </em><tt class="descclassname">chemistry.charmm.charmmcrds.</tt><tt class="descname">CharmmRstFile</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.charmm.charmmcrds.CharmmRstFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Reads and parses data, velocities and coordinates from a CHARMM restart
+file (.rst) of file name &#8216;fname&#8217; into class attributes</p>
+<dl class="docutils">
+<dt>Main attributes:</dt>
+<dd><ul class="first last simple">
+<li>natom (int) : Number of atoms in the system</li>
+<li>resname (list) : Names of all residues</li>
+<li>coords (list) : All cartesian coordinates [x1, y1, z1, x2, ...]</li>
+<li>coordsold (list) : Old cartesian coordinates</li>
+<li>vels (list) : List of all cartesian velocities</li>
+</ul>
+</dd>
+</dl>
+<p>Example:
+&gt;&gt;&gt; chm = CharmmRstFile(&#8216;testfiles/sample-charmm.rst&#8217;)
+&gt;&gt;&gt; print chm.header[0]
+REST    37     1
+&gt;&gt;&gt; natom, nc, nco = chm.natom, len(chm.coords), len(chm.coordsold)
+&gt;&gt;&gt; nv = len(chm.vels)
+&gt;&gt;&gt; print &#8216;%d atoms; %d crds; %d old crds; %d vels&#8217; % (natom, nc, nco, nv)
+256 atoms; 768 crds; 768 old crds; 768 vels</p>
+<dl class="method">
+<dt id="chemistry.charmm.charmmcrds.CharmmRstFile.printcoords">
+<tt class="descname">printcoords</tt><big>(</big><em>crds</em><big>)</big><a class="headerlink" href="#chemistry.charmm.charmmcrds.CharmmRstFile.printcoords" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.charmmcrds.CharmmRstFile.scan">
+<tt class="descname">scan</tt><big>(</big><em>handle</em>, <em>str</em>, <em>r=0</em><big>)</big><a class="headerlink" href="#chemistry.charmm.charmmcrds.CharmmRstFile.scan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.charmm.openmmloader">
+<span id="chemistry-charmm-openmmloader-module"></span><h2>chemistry.charmm.openmmloader module<a class="headerlink" href="#module-chemistry.charmm.openmmloader" title="Permalink to this headline">¶</a></h2>
+<p>This module contains OpenMM-enabled components of the CHARMM classes</p>
+<p>Author: Jason M. Swails
+Contributors:
+Date: April 5, 2014</p>
+<dl class="class">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmCrdFile">
+<em class="property">class </em><tt class="descclassname">chemistry.charmm.openmmloader.</tt><tt class="descname">OpenMMCharmmCrdFile</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmCrdFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistry.charmm.charmmcrds.CharmmCrdFile" title="chemistry.charmm.charmmcrds.CharmmCrdFile"><tt class="xref py py-class docutils literal"><span class="pre">chemistry.charmm.charmmcrds.CharmmCrdFile</span></tt></a></p>
+<p>An OpenMM-enabled version of CharmmCrdFile</p>
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmCrdFile.positions">
+<tt class="descname">positions</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmCrdFile.positions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile">
+<em class="property">class </em><tt class="descclassname">chemistry.charmm.openmmloader.</tt><tt class="descname">OpenMMCharmmPsfFile</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistry.charmm.psf.CharmmPsfFile" title="chemistry.charmm.psf.CharmmPsfFile"><tt class="xref py py-class docutils literal"><span class="pre">chemistry.charmm.psf.CharmmPsfFile</span></tt></a></p>
+<p>Same as CharmmPsfFile but implements OpenMM functionality on top</p>
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.ANGLE_FORCE_GROUP">
+<tt class="descname">ANGLE_FORCE_GROUP</tt><em class="property"> = 1</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.ANGLE_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.BOND_FORCE_GROUP">
+<tt class="descname">BOND_FORCE_GROUP</tt><em class="property"> = 0</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.BOND_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.CMAP_FORCE_GROUP">
+<tt class="descname">CMAP_FORCE_GROUP</tt><em class="property"> = 5</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.CMAP_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.DIHEDRAL_FORCE_GROUP">
+<tt class="descname">DIHEDRAL_FORCE_GROUP</tt><em class="property"> = 2</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.DIHEDRAL_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.GB_FORCE_GROUP">
+<tt class="descname">GB_FORCE_GROUP</tt><em class="property"> = 6</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.GB_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.IMPROPER_FORCE_GROUP">
+<tt class="descname">IMPROPER_FORCE_GROUP</tt><em class="property"> = 4</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.IMPROPER_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.NONBONDED_FORCE_GROUP">
+<tt class="descname">NONBONDED_FORCE_GROUP</tt><em class="property"> = 6</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.NONBONDED_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.UREY_BRADLEY_FORCE_GROUP">
+<tt class="descname">UREY_BRADLEY_FORCE_GROUP</tt><em class="property"> = 3</em><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.UREY_BRADLEY_FORCE_GROUP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.boxLengths">
+<tt class="descname">boxLengths</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.boxLengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of 3 units</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.boxVectors">
+<tt class="descname">boxVectors</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.boxVectors" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.box_lengths">
+<tt class="descname">box_lengths</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.box_lengths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return tuple of 3 units</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.createSystem">
+<tt class="descname">createSystem</tt><big>(</big><em>params</em>, <em>nonbondedMethod=NoCutoff</em>, <em>nonbondedCutoff=Quantity(value=1.0</em>, <em>unit=nanometer)</em>, <em>switchDistance=Quantity(value=0.0</em>, <em>unit=nanometer)</em>, <em>constraints=None</em>, <em>rigidWater=True</em>, <em>implicitSolvent=None</em>, <em>implicitSolventKappa=None</em>, <em>implicitSolventSaltConc=Quantity(value=0.0</em>, <em>unit=mole/liter)</em>, <em>temperature=Quantity(value=298.15</em>, <em>unit=kelvin)</em>, <em>soluteDielectric=1.0</em>, <em>solventDielectric=78.5</em>, <em>removeCMMotion=True</em>, <em>hydrogenMass=None</em>, <em>ewaldErrorTolerance=0.0005</em>, <em>flexibleConstraints=True</em>, <em>verbose=False</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.createSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct an OpenMM System representing the topology described by the
+prmtop file.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><p class="first">params (CharmmParameterSet) All of the parameters for the system</p>
+</li>
+<li><dl class="first docutils">
+<dt>nonbondedMethod (object=NoCutoff) The method to use for nonbonded</dt>
+<dd><p class="first last">interactions. Allowed values are NoCutoff, CutoffNonPeriodic,
+CutoffPeriodic, Ewald, or PME.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>nonbondedCutoff (distance=1*nanometer) The cutoff distance to use</dt>
+<dd><p class="first last">for nonbonded interactions.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>switchDistance (distance=0*nanometer) The distance at which the</dt>
+<dd><p class="first last">switching function is active for nonbonded interactions. If the
+switchDistance evaluates to boolean False (if it is 0), no
+switching function will be used. Illegal values will raise a
+ValueError</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>constraints (object=None) Specifies which bonds or angles should be</dt>
+<dd><p class="first last">implemented with constraints. Allowed values are None, HBonds,
+AllBonds, or HAngles.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>rigidWater (boolean=True) If true, water molecules will be fully</dt>
+<dd><p class="first last">rigid regardless of the value passed for the constraints argument</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolvent (object=None) If not None, the implicit solvent</dt>
+<dd><p class="first last">model to use. Allowed values are HCT, OBC1, OBC2, or GBn</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolventKappa (float=None): Debye screening parameter to</dt>
+<dd><p class="first last">model salt concentrations in GB solvent.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>implicitSolventSaltConc (float=0.0*u.moles/u.liter): Salt</dt>
+<dd><p class="first last">concentration for GB simulations. Converted to Debye length
+<a href="#id1"><span class="problematic" id="id2">`</span></a>kappa&#8217;</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>temperature (float=298.15*u.kelvin): Temperature used in the salt</dt>
+<dd><p class="first last">concentration-to-kappa conversion for GB salt concentration term</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>soluteDielectric (float=1.0) The solute dielectric constant to use</dt>
+<dd><p class="first last">in the implicit solvent model.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>solventDielectric (float=78.5) The solvent dielectric constant to</dt>
+<dd><p class="first last">use in the implicit solvent model.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>removeCMMotion (boolean=True) If true, a CMMotionRemover will be</dt>
+<dd><p class="first last">added to the System.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>hydrogenMass (mass=None) The mass to use for hydrogen atoms bound to</dt>
+<dd><p class="first last">heavy atoms. Any mass added to a hydrogen is subtracted from the
+heavy atom to keep their total mass the same.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>ewaldErrorTolerance (float=0.0005) The error tolerance to use if the</dt>
+<dd><p class="first last">nonbonded method is Ewald or PME.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">flexibleConstraints (bool=True) Are our constraints flexible or not?</p>
+</li>
+<li><p class="first">verbose (bool=False) Optionally prints out a running progress report</p>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.loadParameters">
+<tt class="descname">loadParameters</tt><big>(</big><em>parmset</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.loadParameters" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.positions">
+<tt class="descname">positions</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.positions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the cached positions or create new ones from the atoms</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.setBox">
+<tt class="descname">setBox</tt><big>(</big><em>a</em>, <em>b</em>, <em>c</em>, <em>alpha=Quantity(value=90.0</em>, <em>unit=degree)</em>, <em>beta=Quantity(value=90.0</em>, <em>unit=degree)</em>, <em>gamma=Quantity(value=90.0</em>, <em>unit=degree)</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.setBox" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the periodic box boundary conditions.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>a, b, c (float) : Lengths of the unit cell</li>
+<li>alpha, beta, gamma (float) : Angles between the unit cell vectors</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.set_box">
+<tt class="descname">set_box</tt><big>(</big><em>a</em>, <em>b</em>, <em>c</em>, <em>alpha=Quantity(value=90.0</em>, <em>unit=degree)</em>, <em>beta=Quantity(value=90.0</em>, <em>unit=degree)</em>, <em>gamma=Quantity(value=90.0</em>, <em>unit=degree)</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.set_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the periodic box boundary conditions.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>a, b, c (float) : Lengths of the unit cell</li>
+<li>alpha, beta, gamma (float) : Angles between the unit cell vectors</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.system">
+<tt class="descname">system</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the cached system class &#8211; it needs to be initialized via
+&#8220;createSystem&#8221; first!</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.topology">
+<tt class="descname">topology</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.topology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create an OpenMM Topology object from the stored bonded network</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.velocities">
+<tt class="descname">velocities</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmPsfFile.velocities" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same as for positions, but for velocities</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmRstFile">
+<em class="property">class </em><tt class="descclassname">chemistry.charmm.openmmloader.</tt><tt class="descname">OpenMMCharmmRstFile</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmRstFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#chemistry.charmm.charmmcrds.CharmmRstFile" title="chemistry.charmm.charmmcrds.CharmmRstFile"><tt class="xref py py-class docutils literal"><span class="pre">chemistry.charmm.charmmcrds.CharmmRstFile</span></tt></a></p>
+<p>An OpenMM-enabled version of CharmmRstFile</p>
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmRstFile.positions">
+<tt class="descname">positions</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmRstFile.positions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="chemistry.charmm.openmmloader.OpenMMCharmmRstFile.velocities">
+<tt class="descname">velocities</tt><a class="headerlink" href="#chemistry.charmm.openmmloader.OpenMMCharmmRstFile.velocities" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.charmm.parameters">
+<span id="chemistry-charmm-parameters-module"></span><h2>chemistry.charmm.parameters module<a class="headerlink" href="#module-chemistry.charmm.parameters" title="Permalink to this headline">¶</a></h2>
+<p>This module contains classes for parsing and processing CHARMM parameter,
+topology, and stream files. It only extracts atom properties from the
+topology files and extracts all parameters from the parameter files</p>
+<p>Author: Jason M. Swails
+Contributors:
+Date: April 5, 2014</p>
+<dl class="class">
+<dt id="chemistry.charmm.parameters.CharmmParameterSet">
+<em class="property">class </em><tt class="descclassname">chemistry.charmm.parameters.</tt><tt class="descname">CharmmParameterSet</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.CharmmParameterSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Stores a parameter set defined by CHARMM files. It stores the equivalent of
+the information found in the MASS section of the CHARMM topology file
+(TOP/RTF) and all of the information in the parameter files (PAR)</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd><p class="first">All type lists are dictionaries whose keys are tuples (with however
+many elements are needed to define that type of parameter). The types
+that can be in any order are SORTED.</p>
+<ul class="simple">
+<li>atom_types_str</li>
+<li>atom_types_int</li>
+<li>atom_types_tuple</li>
+<li>bond_types</li>
+<li>angle_types</li>
+<li>urey_bradley_types</li>
+<li>dihedral_types</li>
+<li>improper_types</li>
+<li>cmap_types</li>
+<li>nbfix_types</li>
+</ul>
+<p class="last">The dihedral types can be multiterm, so the values for each dict key is
+actually a list of DihedralType instances. The atom_types are dicts that
+match the name (str), number (int), or (name, number) tuple (tuple) to
+the atom type. The tuple is guaranteed to be the most robust, although
+when only the integer or string is available the other dictionaries are
+helpful</p>
+</dd>
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>filenames <span class="classifier-delimiter">:</span> <span class="classifier">Load all of the parameter, topology, and stream files</span></dt>
+<dd><p class="first">into the parameter set. The following file type suffixes are
+recognized. Unrecognized file types raise a TypeError
+.rtf, .top &#8211; Residue Topology file
+.par, .prm &#8211; Parameter file
+.str &#8211; stream file
+.inp &#8211; If &#8220;par&#8221; is in the file name, it is a parameter file. If</p>
+<blockquote class="last">
+<div><p>&#8220;top&#8221; is in the file name, it is a topology file</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="chemistry.charmm.parameters.CharmmParameterSet.condense">
+<tt class="descname">condense</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.CharmmParameterSet.condense" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function goes through each of the parameter type dicts and
+eliminates duplicate types. After calling this function, every unique
+bond, angle, dihedral, improper, or cmap type will pair with EVERY key
+in the type mapping dictionaries that points to the equivalent type</p>
+<dl class="docutils">
+<dt>Returns:</dt>
+<dd><ul class="first last simple">
+<li>Returns the instance that is being condensed.</li>
+</ul>
+</dd>
+<dt>Notes:</dt>
+<dd>The return value allows you to condense the types at construction
+time.</dd>
+</dl>
+<p>Example:
+&gt;&gt;&gt; params = CharmmParameterSet.load_set(pfile=&#8217;charmm.prm&#8217;).condense()</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="chemistry.charmm.parameters.CharmmParameterSet.load_set">
+<em class="property">classmethod </em><tt class="descname">load_set</tt><big>(</big><em>tfile=None</em>, <em>pfile=None</em>, <em>sfiles=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.CharmmParameterSet.load_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instantiates a CharmmParameterSet from a Topology file and a Parameter
+file (or just a Parameter file if it has all information)</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>tfile (str) : Name of the Topology (RTF/TOP) file</li>
+<li>pfile (str) : Name of the Parameter (PAR) file</li>
+<li>sfiles (list of str) : List or tuple of stream (STR) file names.</li>
+</ul>
+</dd>
+<dt>Returns:</dt>
+<dd>New CharmmParameterSet populated with the parameters found in the
+provided files.</dd>
+<dt>Notes:</dt>
+<dd>The RTF file is read first (if provided), followed by the PAR file,
+followed by the list of stream files (in the order they are
+provided). Parameters in each stream file will overwrite those that
+came before (or simply append to the existing set if they are
+different)</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.parameters.CharmmParameterSet.read_parameter_file">
+<tt class="descname">read_parameter_file</tt><big>(</big><em>pfile</em><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.CharmmParameterSet.read_parameter_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads all of the parameters from a parameter file. Versions 36 and
+later of the CHARMM force field files have an ATOMS section defining
+all of the atom types.  Older versions need to load this information
+from the RTF/TOP files.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>pfile (str) : Name of the CHARMM PARameter file to read</li>
+</ul>
+</dd>
+</dl>
+<p>Notes: The atom types must all be loaded by the end of this routine.
+Either supply a PAR file with atom definitions in them or read in a
+RTF/TOP file first. Failure to do so will result in a raised
+RuntimeError.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.parameters.CharmmParameterSet.read_stream_file">
+<tt class="descname">read_stream_file</tt><big>(</big><em>sfile</em><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.CharmmParameterSet.read_stream_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads RTF and PAR sections from a stream file and dispatches the
+sections to read_topology_file or read_parameter_file</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>sfile (str or CharmmStreamFile) : Stream file to parse</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.parameters.CharmmParameterSet.read_topology_file">
+<tt class="descname">read_topology_file</tt><big>(</big><em>tfile</em><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.CharmmParameterSet.read_topology_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads _only_ the atom type definitions from a topology file. This is
+unnecessary for versions 36 and later of the CHARMM force field.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>tfile (str) : Name of the CHARMM TOPology file to read</li>
+</ul>
+</dd>
+</dl>
+<p>Note: The CHARMM TOPology file is also called a Residue Topology File</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="chemistry.charmm.parameters.element_by_mass">
+<tt class="descclassname">chemistry.charmm.parameters.</tt><tt class="descname">element_by_mass</tt><big>(</big><em>mass</em><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.element_by_mass" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines what element the given atom is based on its mass</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.charmm.psf">
+<span id="chemistry-charmm-psf-module"></span><h2>chemistry.charmm.psf module<a class="headerlink" href="#module-chemistry.charmm.psf" title="Permalink to this headline">¶</a></h2>
+<p>Provides a Python class for parsing a PSF file and setting up a system
+structure for it</p>
+<p>Author: Jason M. Swails
+Contributors:
+Date: April 5, 2014</p>
+<dl class="class">
+<dt id="chemistry.charmm.psf.CharmmPsfFile">
+<em class="property">class </em><tt class="descclassname">chemistry.charmm.psf.</tt><tt class="descname">CharmmPsfFile</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.charmm.psf.CharmmPsfFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>A chemical structure instantiated from CHARMM files.</p>
+<p>Example:
+&gt;&gt;&gt; cs = CharmmPsfFile(&#8220;testfiles/test.psf&#8221;)</p>
+<p>This structure has numerous attributes that are lists of the elements of
+this structure, including atoms, bonds, torsions, etc. The attributes are</p>
+<blockquote>
+<div><ul class="simple">
+<li>residue_list</li>
+<li>atom_list</li>
+<li>bond_list</li>
+<li>angle_list</li>
+<li>dihedral_list</li>
+<li>improper_list</li>
+<li>cmap_list</li>
+<li>donor_list    # hbonds donors?</li>
+<li>acceptor_list # hbond acceptors?</li>
+<li>group_list    # list of nonbonded interaction groups</li>
+</ul>
+</div></blockquote>
+<p>Additional attribute is available if a CharmmParameterSet is loaded into
+this structure.</p>
+<blockquote>
+<div><ul class="simple">
+<li>urey_bradley_list</li>
+</ul>
+</div></blockquote>
+<p>The lengths of each of these lists gives the pointers (e.g., natom, nres,
+etc.)</p>
+<p>Example:
+&gt;&gt;&gt; cs = CharmmPsfFile(&#8220;testfiles/test.psf&#8221;)
+&gt;&gt;&gt; len(cs.atom_list)
+33
+&gt;&gt;&gt; len(cs.bond_list)
+32</p>
+<dl class="method">
+<dt id="chemistry.charmm.psf.CharmmPsfFile.load_parameters">
+<tt class="descname">load_parameters</tt><big>(</big><em>parmset</em><big>)</big><a class="headerlink" href="#chemistry.charmm.psf.CharmmPsfFile.load_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads parameters from a parameter set that was loaded via CHARMM RTF,
+PAR, and STR files.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last simple">
+<li>parmset (ParameterSet) : List of all parameters</li>
+</ul>
+</dd>
+<dt>Notes:</dt>
+<dd><ul class="first last simple">
+<li>If any parameters that are necessary cannot be found, a
+MissingParameter exception is raised.</li>
+<li>If any dihedral or improper parameters cannot be found, I will try
+inserting wildcards (at either end for dihedrals and as the two
+central atoms in impropers) and see if that matches.  Wild-cards
+will apply ONLY if specific parameters cannot be found.</li>
+<li>This method will expand the dihedral_list attribute by adding a
+separate Dihedral object for each term for types that have a
+multi-term expansion</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.psf.CharmmPsfFile.set_box">
+<tt class="descname">set_box</tt><big>(</big><em>a</em>, <em>b</em>, <em>c</em>, <em>alpha=90.0</em>, <em>beta=90.0</em>, <em>gamma=90.0</em><big>)</big><a class="headerlink" href="#chemistry.charmm.psf.CharmmPsfFile.set_box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the periodic box boundary conditions.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><p class="first">a, b, c (float) : Unit cell lengths (in angstroms)</p>
+</li>
+<li><dl class="first docutils">
+<dt>alpha, beta, gamma (float) <span class="classifier-delimiter">:</span> <span class="classifier">Angles between unit cell vectors in</span></dt>
+<dd><p class="first last">degrees</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.psf.CharmmPsfFile.set_coordinates">
+<tt class="descname">set_coordinates</tt><big>(</big><em>positions</em>, <em>velocities=None</em><big>)</big><a class="headerlink" href="#chemistry.charmm.psf.CharmmPsfFile.set_coordinates" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method loads the coordinates and velocity information from an
+external object or passed data.</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>positions (list of floats) <span class="classifier-delimiter">:</span> <span class="classifier">A 3-N length iterable with all of the</span></dt>
+<dd><p class="first last">coordinates in the order [x1, y1, z1, x2, y2, z2, ...].</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>velocities (list of floats) <span class="classifier-delimiter">:</span> <span class="classifier">If not None, is the velocity</span></dt>
+<dd><p class="first last">equivalent of the positions</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.charmm.psf.CharmmPsfFile.write_psf">
+<tt class="descname">write_psf</tt><big>(</big><em>dest</em>, <em>vmd=False</em><big>)</big><a class="headerlink" href="#chemistry.charmm.psf.CharmmPsfFile.write_psf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a PSF file from the stored molecule</p>
+<dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>dest (str or file-like) <span class="classifier-delimiter">:</span> <span class="classifier">The place to write the output PSF file.</span></dt>
+<dd><p class="first last">If it has a &#8220;write&#8221; attribute, it will be used to print the
+PSF file. Otherwise, it will be treated like a string and a
+file will be opened, printed, then closed</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>vmd (bool) <span class="classifier-delimiter">:</span> <span class="classifier">If True, it will write out a PSF in the format that</span></dt>
+<dd><p class="first last">VMD prints it in (i.e., no NUMLP/NUMLPH or MOLNT sections)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span> <span class="o">=</span> <span class="n">CharmmPsfFile</span><span class="p">(</span><span class="s">&#39;testfiles/test.psf&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cs</span><span class="o">.</span><span class="n">write_psf</span><span class="p">(</span><span class="s">&#39;testfiles/test2.psf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="chemistry.charmm.psf.set_molecules">
+<tt class="descclassname">chemistry.charmm.psf.</tt><tt class="descname">set_molecules</tt><big>(</big><em>atom_list</em><big>)</big><a class="headerlink" href="#chemistry.charmm.psf.set_molecules" title="Permalink to this definition">¶</a></dt>
+<dd><p>Correctly sets the molecularity of the system based on connectivity.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-chemistry.charmm">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-chemistry.charmm" title="Permalink to this headline">¶</a></h2>
+<p>This package contains code for reading CHARMM structure files for setting up a
+simulation with CHARMM; specifically PSF, PAR, RTF, and STR files</p>
+<blockquote>
+<div><ul>
+<li><dl class="first docutils">
+<dt>PAR <span class="classifier-delimiter">:</span> <span class="classifier">Parameter file (PRM) &#8211; this contains all of the force field</span></dt>
+<dd><p class="first last">parameters (e.g., bond lengths and strengths) for all of the atom
+types</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>RTF <span class="classifier-delimiter">:</span> <span class="classifier">Residue Topology File &#8211; this file contains the residue</span></dt>
+<dd><p class="first last">connectivity tables as well as a definition of all of the atom
+types. Also contains an internal coordinate representation of the
+residues</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>PSF <span class="classifier-delimiter">:</span> <span class="classifier">Protein Structure File &#8211; this is the main file type in CHARMM</span></dt>
+<dd><p class="first last">simulations that defines all of the residues in a system as well as
+the atom types and connectivity between the atoms</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>STR <span class="classifier-delimiter">:</span> <span class="classifier">Stream file &#8211; Source of additional information and CHARMM commands</span></dt>
+<dd><p class="first last">that can contain RTF and PAR information. Allows users to define
+additional parameters without &#8216;contaminating&#8217; the original force
+field parameter files</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">chemistry.charmm package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-chemistry.charmm.charmmcrds">chemistry.charmm.charmmcrds module</a></li>
+<li><a class="reference internal" href="#module-chemistry.charmm.openmmloader">chemistry.charmm.openmmloader module</a></li>
+<li><a class="reference internal" href="#module-chemistry.charmm.parameters">chemistry.charmm.parameters module</a></li>
+<li><a class="reference internal" href="#module-chemistry.charmm.psf">chemistry.charmm.psf module</a></li>
+<li><a class="reference internal" href="#module-chemistry.charmm">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/chemistry.charmm.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">ParmEd 1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Jason Swails.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>
