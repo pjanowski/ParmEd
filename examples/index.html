@@ -22,8 +22,25 @@
           <h2>OpenMM Code Examples</h2>
         </header>
 
-          <a href="amber.html" class="button"><span>Examples with AMBER Files</span></a>
-          <a href="charmm.html" class="button"><span>Examples with CHARMM Files</span></a>
+        <p>ParmEd implements a Python API for using parameter, topology, and
+        coordinate files from either CHARMM or Amber to run a GPU-accelerated
+        molecular dynamics simulation using OpenMM.</p>
+        <p>The Amber file interface presented here gives the same interface as
+        the one provided by OpenMM, but the <code>AmberParm</code> class here is
+        compatible with the ParmEd API and exposes a more comprehensive
+        interface for modifying the Hamiltonian and underlying parameter
+        set.</p>
+        <p>The CHARMM file interface included in ParmEd is not currently
+        available in the release versions of OpenMM (version 6.0 as of April 22,
+        2014). The core routines required to create an OpenMM
+        <code>System</code> object have been ported to OpenMM and will be
+        available in later versions, but developments allowing the structure and
+        parameters to be modified will be implemented here.</p>
+        <p>Choose one of the following:</p>
+        <ul>
+            <li><p><a href="amber.html">Using AMBER Files</a></p>
+            <li><p><a href="charmm.html">Using CHARMM Files</a></p>
+        </ul>
 
       </div>
     </div>
