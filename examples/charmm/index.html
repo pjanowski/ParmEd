@@ -21,10 +21,6 @@
           <h1 id="project_title">ParmEd</h1>
           <h2 id="project_tagline">CHARMM OpenMM Examples</h2>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/swails/ParmEd/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/swails/ParmEd/tarball/master">Download this project as a tar.gz file</a>
-            </section>
         </header>
     </div>
 
@@ -240,7 +236,7 @@ ala2_solv.setBox(max_crds[0]-min_crds[0],
 # Create the OpenMM system
 print('Creating OpenMM System')
 system = ala2_solv.createSystem(params, nonbondedMethod=app.PME,
-                                nonbondedCutoff=6.0*u.angstroms,
+                                nonbondedCutoff=10.0*u.angstroms,
                                 constraints=app.HBonds,
 )
 
