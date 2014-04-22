@@ -127,7 +127,7 @@ sim.step(10000)
 <li>
 <code>constraints=app.HBonds</code> indicates that we want to constrain all bonds in which at least one atom is hydrogen</li>
 <li>
-<code>implicitSolvent=app.GBn2</code> indicates that we want to use the second GBneck model described in Nguyen et al., J. Chem. Theory Comput., 9(4) p. 2020-2034.</li>
+<code>implicitSolvent=app.GBn2</code> indicates that we want to use the second GBneck model described in Nguyen et al., J. Chem. Theory Comput., 2013, 9(4) p. 2020-2034.</li>
 <li>
 <code>implicitSolventSaltConc=0.1*u.liters/u.mole</code> indicates that we want to model a ca. 0.1 molar solution of monovalent ions using a Debye screening model.</li>
 </ul><p>See the API documentation for the <code>chemistry</code> package (<a href="../../chemistry/chemistry.amber.html#module-chemistry.amber.openmmloader">available here</a>) for a full listing of available options.  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).</p>
