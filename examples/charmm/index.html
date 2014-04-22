@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ParmEd : CHARMM OpenMM Examples" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>ParmEd</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/swails/ParmEd">View on GitHub</a>
+
+          <h1 id="project_title">ParmEd</h1>
+          <h2 id="project_tagline">CHARMM OpenMM Examples</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/swails/ParmEd/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/swails/ParmEd/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="examples-using-charmm-files" class="anchor" href="#examples-using-charmm-files"><span class="octicon octicon-link"></span></a>Examples using CHARMM Files</h1>
+
+<p>There are popular ways to model biomolecular systems.  Because solvation effects are often (always?) critically important to biological function, we need some way to model the solvent.  The two popular approaches are to employ a continuum model with a dielectric constant equal to that of the bulk solvent or to model the solvent models directly in your system.  These two approaches are termed <em>implicit</em> and <em>explicit</em> solvation, respectively.</p>
+
+<p>The next 2 sections present examples using a Generalized Born implicit solvent model and explicit solvent based on the TIP3P water model. All of the files and examples here are included in the <code>examples/charmm</code> directory of the ParmEd release.</p>
+
+<h2>
+<a name="generalized-born-implicit-solvent" class="anchor" href="#generalized-born-implicit-solvent"><span class="octicon octicon-link"></span></a>Generalized Born Implicit Solvent</h2>
+
+<p>For the purposes of this example, we are using an alanine pentapeptide.  You can download the files using the following links (or see the same files in the <code>examples/charmm</code> directory of the ParmEd release):</p>
+
+<ul>
+<li>
+<a href="ala5_autopsf.psf">ala5_autopsf.psf</a> : The VMD-generated PSF file</li>
+<li>
+<a href="ala5_autopsf.pdb">ala5_autopsf.pdb</a> : The corresponding PDB coordinate file</li>
+</ul><p>The following sample script (<code>simulate_charmm_gb.py</code> in the ParmEd release) will set up and run the simulation using OpenMM:</p>
+
+<pre><code>#!/usr/bin/env python
+from __future__ import division, print_function
+
+import sys
+
+# OpenMM Imports
+import simtk.unit as u
+import simtk.openmm as mm
+import simtk.openmm.app as app
+
+# ParmEd Imports
+from chemistry.charmm.openmmloader import (OpenMMCharmmPsfFile as CharmmPsfFile,
+                                           OpenMMCharmmCrdFile as CharmmCrdFile)
+from chemistry.charmm.parameters import CharmmParameterSet
+from chemistry.amber.openmmreporters import (
+            AmberStateDataReporter as AKMAStateDataReporter)
+
+# Load the CHARMM files
+print('Loading CHARMM files...')
+params = CharmmParameterSet('toppar/par_all36_prot.prm')
+ala5_gas = CharmmPsfFile('ala5_autopsf.psf')
+ala5_crds = app.PDBFile('ala5_autopsf.pdb')
+
+# Create the OpenMM system
+print('Creating OpenMM System')
+system = ala5_gas.createSystem(params, nonbondedMethod=app.NoCutoff,
+                               constraints=app.HBonds, implicitSolvent=app.HCT,
+                               implicitSolventSaltConc=0.1*u.moles/u.liter,
+)
+
+# Create the integrator to do Langevin dynamics
+integrator = mm.LangevinIntegrator(
+                        300*u.kelvin,       # Temperature of heat bath
+                        1.0/u.picoseconds,  # Friction coefficient
+                        2.0*u.femtoseconds, # Time step
+)
+
+# Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify
+# the platform to use the default (fastest) platform
+platform = mm.Platform.getPlatformByName('CUDA')
+prop = dict(CudaPrecision='mixed') # Use mixed single/double precision
+
+# Create the Simulation object
+sim = app.Simulation(ala5_gas.topology, system, integrator, platform, prop)
+
+# Set the particle positions
+sim.context.setPositions(ala5_crds.positions)
+
+# Minimize the energy
+print('Minimizing energy')
+sim.minimizeEnergy(maxIterations=500)
+
+# Set up the reporters to report energies and coordinates every 100 steps
+sim.reporters.append(
+        AKMAStateDataReporter(sys.stdout, 100, step=True, potentialEnergy=True,
+                              kineticEnergy=True, temperature=True,
+                              volume=True, density=True)
+)
+sim.reporters.append(app.DCDReporter('ala5_gb.dcd', 100))
+
+# Run dynamics
+print('Running dynamics')
+sim.step(10000)
+</code></pre>
+
+<p>Now we'll dissect the script to help you understand what is happening at each step.  We will divide the script into the sections following the <code>print</code> statements that announce when each stage begins.</p>
+
+<h3>
+<a name="loading-charmm-files" class="anchor" href="#loading-charmm-files"><span class="octicon octicon-link"></span></a>Loading CHARMM files</h3>
+
+<p>In this stage, we instantiate the <code>CharmmParameterSet</code> with the parameters we wish to use. In this example we are using the CHARMM 36 force field, but be sure you check <a href="http://mackerell.umaryland.edu/CHARMM_ff_params.html">the CHARMM parameter website</a> to make sure you use the latest and greatest force fields for your own work.</p>
+
+<p>We also define the <code>CharmmPsfFile</code> object that stores all information about atom connectivity.  The coordinates from PSF files generated by VMD are typically given in PDB format, so we use the OpenMM <code>PDBFile</code> object.</p>
+
+<h3>
+<a name="create-the-openmm-system" class="anchor" href="#create-the-openmm-system"><span class="octicon octicon-link"></span></a>Create the OpenMM system</h3>
+
+<p>This command creates an OpenMM <code>System</code> object from the information stored in <code>ala5_gas</code>. It contains multiple <code>Force</code> instances for the bonds, angles, periodic torsions, improper torsions, Urey-Bradley forces, CMAP potentials, and nonbonded (electrostatic and van der Waals) interactions.  It is in this function that we define the potential parameters we want to use. In this example, we have chosen the default values for each parameter except the ones specified. In particular:</p>
+
+<ul>
+<li>
+<code>params</code> is the parameter set we defined: this is necessary to apply parameters to your system.</li>
+<li>
+<code>nonbondedMethod=app.NoCutoff</code> indicates we do not want to use a cutoff for nonbonded interactions</li>
+<li>
+<code>constraints=app.HBonds</code> indicates that we want to constrain all bonds in which at least one atom is hydrogen</li>
+<li>
+<code>implicitSolvent=app.HCT</code> indicates that we want to use the Hawkins Cramer Truhlar GB model described in Hawkins et al., Chem. Phys. Lett., 1995, 51, p. 19824-19839.</li>
+<li>
+<code>implicitSolventSaltConc=0.1*u.liters/u.mole</code> indicates that we want to model a ca. 0.1 molar solution of monovalent ions using a Debye screening model.</li>
+</ul><p>See the API documentation for the <code>chemistry</code> package (<a href="../../chemistry/chemistry.charmm.html#module-chemistry.charmm.openmmloader">available here</a>) for a full listing of available options.  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).</p>
+
+<h3>
+<a name="create-the-integrator-to-do-langevin-dynamics" class="anchor" href="#create-the-integrator-to-do-langevin-dynamics"><span class="octicon octicon-link"></span></a>Create the integrator to do Langevin Dynamics</h3>
+
+<p>In this stage we specify an integrator. Common choices are <code>LangevinIntegrator</code> (as we've chosen here) to do simulations in the NVT ensemble and <code>VerletIntegrator</code> that allows us to do simulations either at constant energy or temperature if using the <code>AndersenThermostat</code>.  In this example, we've chosen the Langevin integrator with a target temperature of 300 K, a friction coefficient of 1/ps and a time step of 2 fs.</p>
+
+<h3>
+<a name="define-the-platform" class="anchor" href="#define-the-platform"><span class="octicon octicon-link"></span></a>Define the platform</h3>
+
+<p>In this stage, we define the platform we want to use.  In this example we have chosen the CUDA platform, but this may not be available on every machine since it only runs on NVidia GPU hardware.  Other choices are OpenCL (which will run on a variety of GPUs including those made by AMD/ATI and CPUs), CPU (which is an optimized version that runs natively on CPUs), and Reference (often quite slow).</p>
+
+<p>The properties can be set for each platform. In this case, we specified that we wanted to use a mixed precision model (a good compromise between speed and precision).</p>
+
+<h3>
+<a name="create-the-simulation-object" class="anchor" href="#create-the-simulation-object"><span class="octicon octicon-link"></span></a>Create the Simulation object</h3>
+
+<p>This step creates a <code>Simulation</code> object that will be used to run the actual simulations.  If we wanted OpenMM to simply pick the fastest platform for us (rather than specify one directly), we could omit the 
+<code>platform</code> and <code>prop</code> arguments.</p>
+
+<h3>
+<a name="set-the-particle-positions" class="anchor" href="#set-the-particle-positions"><span class="octicon octicon-link"></span></a>Set the particle positions</h3>
+
+<p>This stage is very important.  In this step, we set the particle positions stored in the <code>ala5_crds</code> object to our object.  If you omit this step, you can get strange results or other errors like segmentation violations.  These particle positions have been parsed from the PDB file, but you could use a <code>CharmmCrdFile</code> or <code>CharmmRstFile</code> (restart file) instead.</p>
+
+<h3>
+<a name="minimize-the-energy" class="anchor" href="#minimize-the-energy"><span class="octicon octicon-link"></span></a>Minimize the energy</h3>
+
+<p>This stage performs a basic energy minimization to relax particle positions.  This particular invocation will perform at most 500 iterations.</p>
+
+<h3>
+<a name="set-up-the-reporters" class="anchor" href="#set-up-the-reporters"><span class="octicon octicon-link"></span></a>Set up the reporters</h3>
+
+<p>This stage defines reporters that will "report" on the status of the simulation periodically throughout the simulation. The first is an <code>AKMAStateDataReporter</code> which will print out a summary of energies and temperatures every 100 steps.  Unlike the <code>StateDataReporter</code> in OpenMM, this reporter prints values in the AKMA unit system (Angstrom, Kilocalorie per mole, and atomic mass units).  This reporter directs the printout to standard output (the screen), <code>sys.stdout</code> can be replaced with a different file-like object or a file name.</p>
+
+<p>The second reporter is a DCD trajectory reporter, which is written in the standard DCD trajectory format.</p>
+
+<h3>
+<a name="running-dynamics" class="anchor" href="#running-dynamics"><span class="octicon octicon-link"></span></a>Running dynamics</h3>
+
+<p>This is the stage that actually runs the MD.  In this case, we are running 10,000 steps of MD.  The wiki page with "Common recipes" has information regarding running a long simulation in chunks.</p>
+
+<h2>
+<a name="explicit-solvent" class="anchor" href="#explicit-solvent"><span class="octicon octicon-link"></span></a>Explicit solvent</h2>
+
+<p>For the purposes of this example, we are using an alanine dipeptide solvated in a box of water.  You can download the files using the following links (or see the same files in the <code>examples/charmm</code> directory of the ParmEd release):</p>
+
+<ul>
+<li>
+<a href="ala2_charmmgui.psf">ala2_charmmgui.psf</a> : The input PSF file</li>
+<li>
+<a href="ala2_charmmgui.crd">ala2_charmmgui.crd</a> : The input CHARMM coordinate file</li>
+</ul><p>The following sample script (<code>simulate_charmm_gui.py</code> in the ParmEd release) will set up and run the simulation using OpenMM:</p>
+
+<pre><code>#!/usr/bin/env python
+from __future__ import division, print_function
+
+import sys
+
+# OpenMM Imports
+import simtk.unit as u
+import simtk.openmm as mm
+import simtk.openmm.app as app
+
+# ParmEd Imports
+from chemistry.charmm.openmmloader import (OpenMMCharmmPsfFile as CharmmPsfFile,
+                                           OpenMMCharmmCrdFile as CharmmCrdFile)
+from chemistry.charmm.parameters import CharmmParameterSet
+from chemistry.amber.openmmreporters import (
+            AmberStateDataReporter as AKMAStateDataReporter)
+
+# Load the CHARMM files
+print('Loading CHARMM files...')
+params = CharmmParameterSet('toppar/par_all36_prot.prm',
+                            'toppar/toppar_water_ions.str')
+ala2_solv = CharmmPsfFile('ala2_charmmgui.psf')
+ala2_crds = CharmmCrdFile('ala2_charmmgui.crd')
+
+# Compute the box dimensions from the coordinates and set the box lengths (only
+# orthorhombic boxes are currently supported in OpenMM)
+coords = ala2_crds.positions
+min_crds = [coords[0][0], coords[0][1], coords[0][2]]
+max_crds = [coords[0][0], coords[0][1], coords[0][2]]
+
+for coord in coords:
+    min_crds[0] = min(min_crds[0], coord[0])
+    min_crds[1] = min(min_crds[1], coord[1])
+    min_crds[2] = min(min_crds[2], coord[2])
+    max_crds[0] = max(max_crds[0], coord[0])
+    max_crds[1] = max(max_crds[1], coord[1])
+    max_crds[2] = max(max_crds[2], coord[2])
+
+ala2_solv.setBox(max_crds[0]-min_crds[0],
+                 max_crds[1]-min_crds[1],
+                 max_crds[2]-min_crds[2],
+)
+
+# Create the OpenMM system
+print('Creating OpenMM System')
+system = ala2_solv.createSystem(params, nonbondedMethod=app.PME,
+                                nonbondedCutoff=6.0*u.angstroms,
+                                constraints=app.HBonds,
+)
+
+# Create the integrator to do Langevin dynamics
+integrator = mm.LangevinIntegrator(
+                        300*u.kelvin,       # Temperature of heat bath
+                        1.0/u.picoseconds,  # Friction coefficient
+                        2.0*u.femtoseconds, # Time step
+)
+
+# Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify
+# the platform to use the default (fastest) platform
+platform = mm.Platform.getPlatformByName('CUDA')
+prop = dict(CudaPrecision='mixed') # Use mixed single/double precision
+
+# Create the Simulation object
+sim = app.Simulation(ala2_solv.topology, system, integrator, platform, prop)
+
+# Set the particle positions
+sim.context.setPositions(ala2_crds.positions)
+
+# Minimize the energy
+print('Minimizing energy')
+sim.minimizeEnergy(maxIterations=500)
+
+# Set up the reporters to report energies and coordinates every 100 steps
+sim.reporters.append(
+        AKMAStateDataReporter(sys.stdout, 100, step=True, potentialEnergy=True,
+                              kineticEnergy=True, temperature=True,
+                              volume=True, density=True)
+)
+sim.reporters.append(app.DCDReporter('ala2_solv.dcd', 100))
+
+# Run dynamics
+print('Running dynamics')
+sim.step(10000)
+</code></pre>
+
+<p>Now we'll dissect the script to help you understand what is happening at each step.  We will divide the script into the sections following the <code>print</code> statements that announce when each stage begins.</p>
+
+<h3>
+<a name="loading-charmm-files-1" class="anchor" href="#loading-charmm-files-1"><span class="octicon octicon-link"></span></a>Loading CHARMM files</h3>
+
+<p>In this stage, we instantiate the <code>CharmmParameterSet</code> with the parameters we wish to use. In this example we are using the CHARMM 36 force field, but be sure you check <a href="http://mackerell.umaryland.edu/CHARMM_ff_params.html">the CHARMM parameter website</a> to make sure you use the latest and greatest force fields for your own work.  Note that we also need to load the stream file with the water and ion parameters. The file type detection (RTF, parameter, or stream) is done by file-name extension (or the beginning of the file name if the file names end in <code>.inp</code>).</p>
+
+<p>We also define the <code>CharmmPsfFile</code> object that stores all information about atom connectivity.  The coordinates from PSF files generated by CHARMM GUI are given in the CHARMM coordinate format, so we use the <code>CharmmCrdFile</code> class to parse it.</p>
+
+<h3>
+<a name="compute-the-box-dimensions" class="anchor" href="#compute-the-box-dimensions"><span class="octicon octicon-link"></span></a>Compute the box dimensions</h3>
+
+<p>In this step, we compute the box dimensions by calculating the extent of the coordinates in each of the X-, Y-, and Z-directions. Then the call to <code>ala2_solv.setBox</code> sets the periodic box vectors. You can optionally put the three angles between the lattice vectors (<code>alpha</code>, <code>beta</code>, and <code>gamma</code>) after the box lengths. The default angles are 90 degrees, since OpenMM only supports orthorhombic boxes.</p>
+
+<h3>
+<a name="create-the-openmm-system-1" class="anchor" href="#create-the-openmm-system-1"><span class="octicon octicon-link"></span></a>Create the OpenMM system</h3>
+
+<p>This command creates an OpenMM <code>System</code> object from the information stored in <code>ala2_solv</code>. It contains multiple <code>Force</code> instances for the bonds, angles, periodic torsions, improper torsions, Urey-Bradley forces, CMAP potentials, and nonbonded (electrostatic and van der Waals) interactions.  It is in this function that we define the potential parameters we want to use. In this example, we have chosen the default values for each parameter except the ones specified. In particular:</p>
+
+<ul>
+<li>
+<code>params</code> is the parameter set we defined: this is necessary to apply parameters to your system.</li>
+<li>
+<code>nonbondedMethod=app.PME</code> indicates we want to include the full electrostatic interactions using the Particle Mesh Ewald method</li>
+<li>
+<code>nonbondedCutoff=10.0*u.angstroms</code> indicates we want to truncate van der Waals interactions and the direct-space sum in PME to 10 angstroms.</li>
+<li>
+<code>constraints=app.HBonds</code> indicates that we want to constrain all bonds in which at least one atom is hydrogen</li>
+</ul><p>See the API documentation for the <code>chemistry</code> package (<a href="../../chemistry/chemistry.charmm.html#module-chemistry.charmm.openmmloader">available here</a>) for a full listing of available options (such as using a switching function for van der Waals interactions with the <code>switchDistance</code> keyword).  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).</p>
+
+<h3>
+<a name="create-the-integrator-to-do-langevin-dynamics-1" class="anchor" href="#create-the-integrator-to-do-langevin-dynamics-1"><span class="octicon octicon-link"></span></a>Create the integrator to do Langevin Dynamics</h3>
+
+<p>In this stage we specify an integrator. Common choices are <code>LangevinIntegrator</code> (as we've chosen here) to do simulations in the NVT ensemble and <code>VerletIntegrator</code> that allows us to do simulations either at constant energy or temperature if using the <code>AndersenThermostat</code>.  In this example, we've chosen the Langevin integrator with a target temperature of 300 K, a friction coefficient of 1/ps and a time step of 2 fs.</p>
+
+<h3>
+<a name="define-the-platform-1" class="anchor" href="#define-the-platform-1"><span class="octicon octicon-link"></span></a>Define the platform</h3>
+
+<p>In this stage, we define the platform we want to use.  In this example we have chosen the CUDA platform, but this may not be available on every machine since it only runs on NVidia GPU hardware.  Other choices are OpenCL (which will run on a variety of GPUs including those made by AMD/ATI and CPUs), CPU (which is an optimized version that runs natively on CPUs), and Reference (often quite slow).</p>
+
+<p>The properties can be set for each platform. In this case, we specified that we wanted to use a mixed precision model (a good compromise between speed and precision).</p>
+
+<h3>
+<a name="create-the-simulation-object-1" class="anchor" href="#create-the-simulation-object-1"><span class="octicon octicon-link"></span></a>Create the Simulation object</h3>
+
+<p>This step creates a <code>Simulation</code> object that will be used to run the actual simulations.  If we wanted OpenMM to simply pick the fastest platform for us (rather than specify one directly), we could omit the 
+<code>platform</code> and <code>prop</code> arguments.</p>
+
+<h3>
+<a name="set-the-particle-positions-1" class="anchor" href="#set-the-particle-positions-1"><span class="octicon octicon-link"></span></a>Set the particle positions</h3>
+
+<p>This stage is very important.  In this step, we set the particle positions stored in the <code>ala2_crds</code> object to our object.  If you omit this step, you can get strange results or other errors like segmentation violations.  These particle positions have been parsed from the CHARMM coordinate file, but you could use a <code>PDBFile</code> or <code>CharmmRstFile</code> (restart file) instead.</p>
+
+<h3>
+<a name="minimize-the-energy-1" class="anchor" href="#minimize-the-energy-1"><span class="octicon octicon-link"></span></a>Minimize the energy</h3>
+
+<p>This stage performs a basic energy minimization to relax particle positions.  This particular invocation will perform at most 500 iterations.</p>
+
+<h3>
+<a name="set-up-the-reporters-1" class="anchor" href="#set-up-the-reporters-1"><span class="octicon octicon-link"></span></a>Set up the reporters</h3>
+
+<p>This stage defines reporters that will "report" on the status of the simulation periodically throughout the simulation. The first is an <code>AKMAStateDataReporter</code> which will print out a summary of energies and temperatures every 100 steps.  Unlike the <code>StateDataReporter</code> in OpenMM, this reporter prints values in the AKMA unit system (Angstrom, Kilocalorie per mole, and atomic mass units).  This reporter directs the printout to standard output (the screen), <code>sys.stdout</code> can be replaced with a different file-like object or a file name.</p>
+
+<p>The second reporter is a DCD trajectory reporter, which is written in the standard DCD trajectory format.</p>
+
+<h3>
+<a name="running-dynamics-1" class="anchor" href="#running-dynamics-1"><span class="octicon octicon-link"></span></a>Running dynamics</h3>
+
+<p>This is the stage that actually runs the MD.  In this case, we are running 10,000 steps of MD.  The wiki page with "Common recipes" has information regarding running a long simulation in chunks.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ParmEd maintained by <a href="https://github.com/swails">swails</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
