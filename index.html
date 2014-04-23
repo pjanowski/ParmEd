@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>ParmEd by swails</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="ParmEd : Amber parameter topology file editor" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>ParmEd</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1><a href="index.html">ParmEd</a></h1>
-          <h2>Amber parameter topology file editor</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/swails/ParmEd">View on GitHub</a>
+
+          <h1 id="project_title">ParmEd</h1>
+          <h2 id="project_tagline">Amber parameter topology file editor</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/swails/ParmEd/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/swails/ParmEd/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/swails/ParmEd/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/swails/ParmEd/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/swails/ParmEd" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
-
-        <hr>
-
-        <section id="main_content">
-          <h1>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
 <a name="parmed" class="anchor" href="#parmed"><span class="octicon octicon-link"></span></a>ParmEd</h1>
 
 <p>Amber parameter topology file editor</p>
@@ -40,24 +40,23 @@
 <a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h1>
 
 <pre><code>                LESSER GPL LICENSE INFO                             
+</code></pre>
 
-Copyright (C) 2010 - 2014 Jason Swails
+<p>Copyright (C) 2010 - 2014 Jason Swails</p>
 
-This program is free software; you can redistribute it and/or modify
+<p>This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU Lesser General Public License as published by
-the Free Software Foundation
+the Free Software Foundation</p>
 
-This program is distributed in the hope that it will be useful,
+<p>This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+GNU General Public License for more details.</p>
 
-You should have received a copy of the GNU Lesser General Public License
+<p>You should have received a copy of the GNU Lesser General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330,
-Boston, MA 02111-1307, USA.
-
-</code></pre>
+Boston, MA 02111-1307, USA.</p>
 
 <h1>
 <a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a>Description</h1>
@@ -66,112 +65,79 @@ Boston, MA 02111-1307, USA.
 changes to the underlying Hamiltonian in Amber as defined in the
 parameter-topology file. A full description of its capabilities is described in
 the accompanying manual (which is extracted from the full Amber manual that
-is released with Amber 14). The program is comprised of a command
-interpreter (with full readline support), a GUI frontend based on Tkinter with
+is/will be released with Amber 14). The program is comprised of a command
+interpreter (with full readline support), a GUI- frontend based on Tkinter with
 clickable buttons for each action, and a flexible Python API whose use follows
 naturally from the simple command interpreter syntax.</p>
 
 <p>The underlying AmberParm class that ParmEd was built around was augmented with
 OpenMM support so that it is able to directly create an OpenMM System instance
-with a call signature identical to the one provided in the OpenMM
+with a call signature almost identical to the one provided in the OpenMM
 application layer. Improvements implemented here include:</p>
 
-<ul>
-<li><p>Periodic box information is set up from the input coordinate file rather
-    than the parameter-topology file, since that is where the 'preferred' box
-    information is stored in Amber</p></li>
+<p>o  Periodic box information is set up from the input coordinate file rather
+     than the parameter-topology file, since that is where the 'preferred' box
+     information is stored in Amber</p>
 
-<li><p>The parameter topology file class can read in both a topology file and a
-    coordinate file at the same time (this is required to set the default box
-    information from the inpcrd file)</p></li>
+<p>o  The parameter topology file class can read in both a topology file and a
+     coordinate file at the same time (this is required to set the default box
+     information from the inpcrd file)</p>
 
-<li><p>The restart file class/parser is capable of reading both Amber restarts as
-    well as Amber NetCDF restart files, with the format detected
-    automatically</p></li>
+<p>o  The restart file class/parser is capable of reading both Amber restarts as
+     well as Amber NetCDF restart files, with the format detected automatically</p>
 
-<li><p>In many cases, System creation is noticeably faster with this class for
-     large systems.</p></li>
-</ul>
+<p>o  In many cases, System creation is noticeably faster with this class for
+     large systems.</p>
 
 <p>Also included are a handful of OpenMM reporters in the
-<code>chemistry.amber.openmmreporters</code> module, including:</p>
+chemistry.amber.openmmreporters module, including:</p>
 
-<ul>
-<li><p><code>AmberStateDataReporter</code> - Basically copied from StateDataReporter, but
-   prints out data in standard AKMA units like those used in Amber and CHARMM
-   (and provides options in the call signature to specify the set of units you want
-   to use)</p></li>
+<p>o  AmberStateDataReporter - Basically copied from StateDataReporter, but
+       prints out data in standard Amber units (and provides options in the call
+       signature to specify the set of units you want to use)</p>
 
-<li><p><code>RestartReporter</code> - Allows Amber-style ASCII or NetCDF restart files to be
-   written periodically during a simulation. It can either write a series of
-   numbered restarts or continually overwrite the previous one. Fully
-   compatible with all Amber programs.</p></li>
+<p>o  RestartReporter - Allows Amber-style ASCII or NetCDF restart files to be
+       written periodically during a simulation. It can either write a series of
+       numbered restarts or continually overwrite the previous one. Fully
+       compatible with all Amber programs.</p>
 
-<li><p><code>MdcrdReporter</code> - Allows Amber-style ASCII trajectory files to be
-written</p></li>
+<p>o  MdcrdReporter - Allows Amber-style ASCII trajectory files to be written</p>
 
-<li><p><code>NetCDFReporter</code> - Allows Amber-style NetCDF trajectories to be
-written</p></li>
-</ul>
+<p>o  NetCDFReporter - Allows Amber-style NetCDF trajectories to be written</p>
 
 <p>The principle difference between the NetCDF support included here and that
 included in MDTraj is that the NetCDF parsing here is backend agnostic,
-supporting the implementations in the scipy, netCDF4, and ScientificPython
-packages (the first one is written in pure Python and does not require linking
+supporting the implementations in the netCDF4, scipy, and ScientificPython
+packages (the second one is written in pure Python and does not require linking
 to the NetCDF libraries). A default implementation is chosen if no explicit
 choice is made in the order listed above.</p>
 
 <h1>
-<a name="charmm-support" class="anchor" href="#charmm-support"><span class="octicon octicon-link"></span></a>CHARMM Support</h1>
-
-<p>Also included in ParmEd is the ability to read native CHARMM input files
-(PSF, RTF, PAR, STR, coordinate, and restart files).  It can use these files to
-either create an OpenMM <code>System</code> object directly or it can be used to
-generate a topology file that can be used in the <i>pmemd</i>, <i>sander</i>, or
-<i>pmemd.cuda</i> programs in Amber.</p>
-
-<h1>
 <a name="notable-openmm-capabilities" class="anchor" href="#notable-openmm-capabilities"><span class="octicon octicon-link"></span></a>Notable OpenMM Capabilities</h1>
 
-<p>The <code>OpenMM</code> action in ParmEd will read a pmemd/sander-like command-line and an
+<p>The OpenMM action in ParmEd will read a pmemd/sander-like command-line and an
 Amber-style input file and run the simulation using OpenMM through the Python
 application layer with equivalent settings.  It includes options to specify the
 platform and precision model, and also has the option to generate a working
 Python script that will run the equivalent calculation.</p>
 
-<p>The <code>energy</code> action in ParmEd will compute a single-point energy from the loaded
+<p>The "energy" action in ParmEd will compute a single-point energy from the loaded
 coordinates, optionally decomposing the energy contributions into "bond",
 "angle", "dihedral", and "nonbonded" contributions (finer-grained decomposition
 of the nonbonded components is not currently possible except for
 direct/reciprocal decomposition).</p>
-
-<h1>
-<a name="instructions" class="anchor" href="#instructions"><span class="octicon octicon-link"></span></a>Instructions</h1>
-
-<p>You can find instructions for using ParmEd and its OpenMM extensions on the
-ParmEd wiki: <a href="https://github.com/swails/ParmEd/wiki">http://github.com/swails/ParmEd/wiki</a></p>
-
-<h1>
-<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>OpenMM Examples</h1>
-
-<p>You can find sample scripts for running OpenMM simulations on the GPU using
-either CHARMM or AMBER files <a href="examples/index.html">by clicking here</a></p>
-
-<h1>
-<a name="chemistry-api" class="anchor" href="#chemistryapi"><span class="octicon octicon-link"></span></a>API Documentation</h1>
-<p> You can access the API documentation for the <code>chemistry</code> Python
-package <a href="chemistry/index.html">by clicking here.</a></p>
-
-        </section>
-
-        <footer>
-          Parmed is maintained by <a href="https://github.com/swails">swails</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-
-
-      </div>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">ParmEd maintained by <a href="https://github.com/swails">swails</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
   </body>
 </html>
