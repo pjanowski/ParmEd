@@ -87,10 +87,10 @@ In this stage, we simply instantiate the `AmberParm` object from the input topol
 This command creates an OpenMM `System` object from the information stored in `ala5_gas`. It contains multiple `Force` instances for the bonds, angles, periodic torsions, and nonbonded (electrostatic and van der Waals) interactions.  It is in this function that we define the potential parameters we want to use. In this example, we have chosen the default values for each parameter except the ones specified. In particular:
 * `nonbondedMethod=app.NoCutoff` indicates we do not want to use a cutoff for nonbonded interactions
 * `constraints=app.HBonds` indicates that we want to constrain all bonds in which at least one atom is hydrogen
-* `implicitSolvent=app.GBn2` indicates that we want to use the second GBneck model described in Nguyen et al., J. Chem. Theory Comput., 9(4) p. 2020-2034.
+* `implicitSolvent=app.GBn2` indicates that we want to use the second GBneck model described in Nguyen et al., J. Chem. Theory Comput., 2013, 9(4) p. 2020-2034.
 * `implicitSolventSaltConc=0.1*u.liters/u.mole` indicates that we want to model a ca. 0.1 molar solution of monovalent ions using a Debye screening model.
 
-See the API documentation for the `chemistry` package ([available here](../chemistry/index.html)) for a full listing of available options.  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).
+See the API documentation for the `chemistry` package ([available here](../../chemistry/chemistry.amber.html#module-chemistry.amber.openmmloader)) for a full listing of available options.  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).
 
 ### Create the integrator to do Langevin Dynamics
 
@@ -212,7 +212,7 @@ This command creates an OpenMM `System` object from the information stored in `a
 * `nonbondedCutoff=8.0*u.angstroms` indicates we want to use an 8 Angstrom cutoff for the Lennard-Jones interaction (as well as the direct-space part of the Ewald sum).
 * `constraints=app.HBonds` indicates that we want to constrain all bonds in which at least one atom is hydrogen
 
-See the API documentation for the `chemistry` package ([available here](../chemistry/index.html)) for a full listing of available options.  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).
+See the API documentation for the `chemistry` package ([available here](../../chemistry/chemistry.amber.html#module-chemistry.amber.openmmloader)) for a full listing of available options.  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).
 
 ### Create the integrator to do Langevin Dynamics
 

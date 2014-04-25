@@ -185,8 +185,9 @@ ala2_solv.setBox(max_crds[0]-min_crds[0],
 # Create the OpenMM system
 print('Creating OpenMM System')
 system = ala2_solv.createSystem(params, nonbondedMethod=app.PME,
-                                nonbondedCutoff=6.0*u.angstroms,
+                                nonbondedCutoff=12.0*u.angstroms,
                                 constraints=app.HBonds,
+                                switchDistance=10.0*u.angstroms,
 )
 
 # Create the integrator to do Langevin dynamics
@@ -241,8 +242,9 @@ In this step, we compute the box dimensions by calculating the extent of the coo
 This command creates an OpenMM `System` object from the information stored in `ala2_solv`. It contains multiple `Force` instances for the bonds, angles, periodic torsions, improper torsions, Urey-Bradley forces, CMAP potentials, and nonbonded (electrostatic and van der Waals) interactions.  It is in this function that we define the potential parameters we want to use. In this example, we have chosen the default values for each parameter except the ones specified. In particular:
 * `params` is the parameter set we defined: this is necessary to apply parameters to your system.
 * `nonbondedMethod=app.PME` indicates we want to include the full electrostatic interactions using the Particle Mesh Ewald method
-* `nonbondedCutoff=10.0*u.angstroms` indicates we want to truncate van der Waals interactions and the direct-space sum in PME to 10 angstroms.
+* `nonbondedCutoff=12.0*u.angstroms` indicates we want to truncate van der Waals interactions and the direct-space sum in PME to 12 angstroms. (This is equivalent to the _ctofnb_ parameter in CHARMM)
 * `constraints=app.HBonds` indicates that we want to constrain all bonds in which at least one atom is hydrogen
+* `switchDistance=10.0*u.angstroms` indicates that we want to turn the switching function _on_ at 10 Angstroms (This is equivalent to the _ctonnb_ parameter in CHARMM)
 
 See the API documentation for the `chemistry` package ([available here](../../chemistry/chemistry.charmm.html#module-chemistry.charmm.openmmloader)) for a full listing of available options (such as using a switching function for van der Waals interactions with the `switchDistance` keyword).  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).
 
