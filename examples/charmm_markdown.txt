@@ -12,7 +12,7 @@ For the purposes of this example, we are using an alanine pentapeptide.  You can
 
 The following sample script (`simulate_charmm_gb.py` in the ParmEd release) will set up and run the simulation using OpenMM:
 
-```
+```Python
 #!/usr/bin/env python
 from __future__ import division, print_function
 
@@ -138,7 +138,7 @@ For the purposes of this example, we are using an alanine dipeptide solvated in 
 
 The following sample script (`simulate_charmm_gui.py` in the ParmEd release) will set up and run the simulation using OpenMM:
 
-```
+```Python
 #!/usr/bin/env python
 from __future__ import division, print_function
 
