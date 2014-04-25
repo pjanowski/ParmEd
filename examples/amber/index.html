@@ -4,7 +4,7 @@
   <head>
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="ParmEd : Amber parameter topology file editor" />
+    <meta name="description" content="ParmEd : Amber OpenMM Examples" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="../../stylesheets/stylesheet.css">
 
@@ -46,68 +46,68 @@
 <a href="ala5_gas.rst7">ala5_gas.rst7</a> : The input coordinate file</li>
 </ul><p>The following sample script (<code>simulate_amber_gb.py</code> in the ParmEd release) will set up and run the simulation using OpenMM:</p>
 
-<pre><code>#!/usr/bin/env python
-from __future__ import division, print_function
+<div class="highlight highlight-Python"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
-import sys
+<span class="kn">import</span> <span class="nn">sys</span>
 
-# OpenMM Imports
-import simtk.unit as u
-import simtk.openmm as mm
-import simtk.openmm.app as app
+<span class="c"># OpenMM Imports</span>
+<span class="kn">import</span> <span class="nn">simtk.unit</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm</span> <span class="kn">as</span> <span class="nn">mm</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm.app</span> <span class="kn">as</span> <span class="nn">app</span>
 
-# ParmEd Imports
-from chemistry.amber.openmmloader import OpenMMAmberParm as AmberParm
-from chemistry.amber.openmmreporters import (
-            AmberStateDataReporter, NetCDFReporter)
+<span class="c"># ParmEd Imports</span>
+<span class="kn">from</span> <span class="nn">chemistry.amber.openmmloader</span> <span class="kn">import</span> <span class="n">OpenMMAmberParm</span> <span class="k">as</span> <span class="n">AmberParm</span>
+<span class="kn">from</span> <span class="nn">chemistry.amber.openmmreporters</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">AmberStateDataReporter</span><span class="p">,</span> <span class="n">NetCDFReporter</span><span class="p">)</span>
 
-# Load the CHARMM files
-print('Loading Amber files...')
-ala5_gas = AmberParm('ala5_gas.parm7', 'ala5_gas.rst7')
+<span class="c"># Load the CHARMM files</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Loading Amber files...'</span><span class="p">)</span>
+<span class="n">ala5_gas</span> <span class="o">=</span> <span class="n">AmberParm</span><span class="p">(</span><span class="s">'ala5_gas.parm7'</span><span class="p">,</span> <span class="s">'ala5_gas.rst7'</span><span class="p">)</span>
 
-# Create the OpenMM system
-print('Creating OpenMM System')
-system = ala5_gas.createSystem(nonbondedMethod=app.NoCutoff,
-                               constraints=app.HBonds, implicitSolvent=app.GBn2,
-                               implicitSolventSaltConc=0.1*u.moles/u.liter,
-)
+<span class="c"># Create the OpenMM system</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Creating OpenMM System'</span><span class="p">)</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">ala5_gas</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">nonbondedMethod</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">NoCutoff</span><span class="p">,</span>
+                               <span class="n">constraints</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">HBonds</span><span class="p">,</span> <span class="n">implicitSolvent</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">GBn2</span><span class="p">,</span>
+                               <span class="n">implicitSolventSaltConc</span><span class="o">=</span><span class="mf">0.1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">moles</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">liter</span><span class="p">,</span>
+<span class="p">)</span>
 
-# Create the integrator to do Langevin dynamics
-integrator = mm.LangevinIntegrator(
-                        300*u.kelvin,       # Temperature of heat bath
-                        1.0/u.picoseconds,  # Friction coefficient
-                        2.0*u.femtoseconds, # Time step
-)
+<span class="c"># Create the integrator to do Langevin dynamics</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">LangevinIntegrator</span><span class="p">(</span>
+                        <span class="mi">300</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">kelvin</span><span class="p">,</span>       <span class="c"># Temperature of heat bath</span>
+                        <span class="mf">1.0</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">picoseconds</span><span class="p">,</span>  <span class="c"># Friction coefficient</span>
+                        <span class="mf">2.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">femtoseconds</span><span class="p">,</span> <span class="c"># Time step</span>
+<span class="p">)</span>
 
-# Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify
-# the platform to use the default (fastest) platform
-platform = mm.Platform.getPlatformByName('CUDA')
-prop = dict(CudaPrecision='mixed') # Use mixed single/double precision
+<span class="c"># Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify</span>
+<span class="c"># the platform to use the default (fastest) platform</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">Platform</span><span class="o">.</span><span class="n">getPlatformByName</span><span class="p">(</span><span class="s">'CUDA'</span><span class="p">)</span>
+<span class="n">prop</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">CudaPrecision</span><span class="o">=</span><span class="s">'mixed'</span><span class="p">)</span> <span class="c"># Use mixed single/double precision</span>
 
-# Create the Simulation object
-sim = app.Simulation(ala5_gas.topology, system, integrator, platform, prop)
+<span class="c"># Create the Simulation object</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">ala5_gas</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">integrator</span><span class="p">,</span> <span class="n">platform</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
 
-# Set the particle positions
-sim.context.setPositions(ala5_gas.positions)
+<span class="c"># Set the particle positions</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">setPositions</span><span class="p">(</span><span class="n">ala5_gas</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 
-# Minimize the energy
-print('Minimizing energy')
-sim.minimizeEnergy(maxIterations=500)
+<span class="c"># Minimize the energy</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Minimizing energy'</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">minimizeEnergy</span><span class="p">(</span><span class="n">maxIterations</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-# Set up the reporters to report energies and coordinates every 100 steps
-sim.reporters.append(
-        AmberStateDataReporter(sys.stdout, 100, step=True, potentialEnergy=True,
-                               kineticEnergy=True, temperature=True)
-)
-sim.reporters.append(
-        NetCDFReporter('ala5_gb.nc', 100, atom=ala5_gas.ptr('natom'),
-                       uses_pbc=False, crds=True)
-)
+<span class="c"># Set up the reporters to report energies and coordinates every 100 steps</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">AmberStateDataReporter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">potentialEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                               <span class="n">kineticEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">NetCDFReporter</span><span class="p">(</span><span class="s">'ala5_gb.nc'</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">atom</span><span class="o">=</span><span class="n">ala5_gas</span><span class="o">.</span><span class="n">ptr</span><span class="p">(</span><span class="s">'natom'</span><span class="p">),</span>
+                       <span class="n">uses_pbc</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">crds</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">)</span>
 
-# Run dynamics
-print('Running dynamics')
-sim.step(10000)
-</code></pre>
+<span class="c"># Run dynamics</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Running dynamics'</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
 
 <p>Now we'll dissect the script to help you understand what is happening at each step.  We will divide the script into the sections following the <code>print</code> statements that announce when each stage begins.</p>
 
@@ -184,70 +184,70 @@ sim.step(10000)
 <a href="ala2_solv.rst7">ala2_solv.rst7</a> : The input coordinate file</li>
 </ul><p>The following sample script (<code>simulate_amber_pme.py</code> in the ParmEd release) will set up and run the simulation using OpenMM:</p>
 
-<pre><code>#!/usr/bin/env python
-from __future__ import division, print_function
+<div class="highlight highlight-Python"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
-import sys
+<span class="kn">import</span> <span class="nn">sys</span>
 
-# OpenMM Imports
-import simtk.unit as u
-import simtk.openmm as mm
-import simtk.openmm.app as app
+<span class="c"># OpenMM Imports</span>
+<span class="kn">import</span> <span class="nn">simtk.unit</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm</span> <span class="kn">as</span> <span class="nn">mm</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm.app</span> <span class="kn">as</span> <span class="nn">app</span>
 
-# ParmEd Imports
-from chemistry.amber.openmmloader import OpenMMAmberParm as AmberParm
-from chemistry.charmm.parameters import CharmmParameterSet
-from chemistry.amber.openmmreporters import (AmberStateDataReporter,
-                                             NetCDFReporter)
+<span class="c"># ParmEd Imports</span>
+<span class="kn">from</span> <span class="nn">chemistry.amber.openmmloader</span> <span class="kn">import</span> <span class="n">OpenMMAmberParm</span> <span class="k">as</span> <span class="n">AmberParm</span>
+<span class="kn">from</span> <span class="nn">chemistry.charmm.parameters</span> <span class="kn">import</span> <span class="n">CharmmParameterSet</span>
+<span class="kn">from</span> <span class="nn">chemistry.amber.openmmreporters</span> <span class="kn">import</span> <span class="p">(</span><span class="n">AmberStateDataReporter</span><span class="p">,</span>
+                                             <span class="n">NetCDFReporter</span><span class="p">)</span>
 
-# Load the CHARMM files
-print('Loading AMBER files...')
-ala2_solv = AmberParm('ala2_solv.parm7', 'ala2_solv.rst7')
+<span class="c"># Load the CHARMM files</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Loading AMBER files...'</span><span class="p">)</span>
+<span class="n">ala2_solv</span> <span class="o">=</span> <span class="n">AmberParm</span><span class="p">(</span><span class="s">'ala2_solv.parm7'</span><span class="p">,</span> <span class="s">'ala2_solv.rst7'</span><span class="p">)</span>
 
-# Create the OpenMM system
-print('Creating OpenMM System')
-system = ala2_solv.createSystem(nonbondedMethod=app.PME,
-                                nonbondedCutoff=8.0*u.angstroms,
-                                constraints=app.HBonds,
-)
+<span class="c"># Create the OpenMM system</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Creating OpenMM System'</span><span class="p">)</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">ala2_solv</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">nonbondedMethod</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">PME</span><span class="p">,</span>
+                                <span class="n">nonbondedCutoff</span><span class="o">=</span><span class="mf">8.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">angstroms</span><span class="p">,</span>
+                                <span class="n">constraints</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">HBonds</span><span class="p">,</span>
+<span class="p">)</span>
 
-# Create the integrator to do Langevin dynamics
-integrator = mm.LangevinIntegrator(
-                        300*u.kelvin,       # Temperature of heat bath
-                        1.0/u.picoseconds,  # Friction coefficient
-                        2.0*u.femtoseconds, # Time step
-)
+<span class="c"># Create the integrator to do Langevin dynamics</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">LangevinIntegrator</span><span class="p">(</span>
+                        <span class="mi">300</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">kelvin</span><span class="p">,</span>       <span class="c"># Temperature of heat bath</span>
+                        <span class="mf">1.0</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">picoseconds</span><span class="p">,</span>  <span class="c"># Friction coefficient</span>
+                        <span class="mf">2.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">femtoseconds</span><span class="p">,</span> <span class="c"># Time step</span>
+<span class="p">)</span>
 
-# Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify
-# the platform to use the default (fastest) platform
-platform = mm.Platform.getPlatformByName('CUDA')
-prop = dict(CudaPrecision='mixed') # Use mixed single/double precision
+<span class="c"># Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify</span>
+<span class="c"># the platform to use the default (fastest) platform</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">Platform</span><span class="o">.</span><span class="n">getPlatformByName</span><span class="p">(</span><span class="s">'CUDA'</span><span class="p">)</span>
+<span class="n">prop</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">CudaPrecision</span><span class="o">=</span><span class="s">'mixed'</span><span class="p">)</span> <span class="c"># Use mixed single/double precision</span>
 
-# Create the Simulation object
-sim = app.Simulation(ala2_solv.topology, system, integrator, platform, prop)
+<span class="c"># Create the Simulation object</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">ala2_solv</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">integrator</span><span class="p">,</span> <span class="n">platform</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
 
-# Set the particle positions
-sim.context.setPositions(ala2_solv.positions)
+<span class="c"># Set the particle positions</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">setPositions</span><span class="p">(</span><span class="n">ala2_solv</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 
-# Minimize the energy
-print('Minimizing energy')
-sim.minimizeEnergy(maxIterations=500)
+<span class="c"># Minimize the energy</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Minimizing energy'</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">minimizeEnergy</span><span class="p">(</span><span class="n">maxIterations</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-# Set up the reporters to report energies and coordinates every 100 steps
-sim.reporters.append(
-        AmberStateDataReporter(sys.stdout, 100, step=True, potentialEnergy=True,
-                              kineticEnergy=True, temperature=True,
-                              volume=True, density=True)
-)
-sim.reporters.append(
-        NetCDFReporter('ala2_solv.nc', 100, atom=ala2_solv.ptr('natom'),
-                       uses_pbc=True, crds=True)
-)
+<span class="c"># Set up the reporters to report energies and coordinates every 100 steps</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">AmberStateDataReporter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">potentialEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                              <span class="n">kineticEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                              <span class="n">volume</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">NetCDFReporter</span><span class="p">(</span><span class="s">'ala2_solv.nc'</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">atom</span><span class="o">=</span><span class="n">ala2_solv</span><span class="o">.</span><span class="n">ptr</span><span class="p">(</span><span class="s">'natom'</span><span class="p">),</span>
+                       <span class="n">uses_pbc</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">crds</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">)</span>
 
-# Run dynamics
-print('Running dynamics')
-sim.step(10000)
-</code></pre>
+<span class="c"># Run dynamics</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Running dynamics'</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
 
 <p>Now we'll dissect the script to help you understand what is happening at each step.  We will divide the script into the sections following the <code>print</code> statements that announce when each stage begins.</p>
 
