@@ -377,6 +377,35 @@ heavy atom to keep their total mass the same.</p>
 
 </dd></dl>
 
+<dl class="function">
+<dt id="chemistry.charmm.openmmloader.read_restart">
+<tt class="descclassname">chemistry.charmm.openmmloader.</tt><tt class="descname">read_restart</tt><big>(</big><em>fname</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.read_restart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a restart file.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>restart object with the following properties:</dt>
+<dd><ul class="first last simple">
+<li>positions</li>
+<li>velocities (empty list if no velocities are present)</li>
+<li>boxVectors (None if box is not present)</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="chemistry.charmm.openmmloader.write_restart">
+<tt class="descclassname">chemistry.charmm.openmmloader.</tt><tt class="descname">write_restart</tt><big>(</big><em>fname</em>, <em>sim</em><big>)</big><a class="headerlink" href="#chemistry.charmm.openmmloader.write_restart" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes an OpenMM Restart file</p>
+<blockquote>
+<div><ul class="simple">
+<li>fname (str) : File name of restart file to write</li>
+<li>sim (Simulation) : OpenMM Simulation object</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
 </div>
 <div class="section" id="module-chemistry.charmm.parameters">
 <span id="chemistry-charmm-parameters-module"></span><h2>chemistry.charmm.parameters module<a class="headerlink" href="#module-chemistry.charmm.parameters" title="Permalink to this headline">¶</a></h2>
