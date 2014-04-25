@@ -46,65 +46,65 @@
 <a href="ala5_autopsf.pdb">ala5_autopsf.pdb</a> : The corresponding PDB coordinate file</li>
 </ul><p>The following sample script (<code>simulate_charmm_gb.py</code> in the ParmEd release) will set up and run the simulation using OpenMM:</p>
 
-<pre><code>#!/usr/bin/env python
-from __future__ import division, print_function
+<div class="highlight highlight-Python"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
-import sys
+<span class="kn">import</span> <span class="nn">sys</span>
 
-# OpenMM Imports
-import simtk.unit as u
-import simtk.openmm as mm
-import simtk.openmm.app as app
+<span class="c"># OpenMM Imports</span>
+<span class="kn">import</span> <span class="nn">simtk.unit</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm</span> <span class="kn">as</span> <span class="nn">mm</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm.app</span> <span class="kn">as</span> <span class="nn">app</span>
 
-# ParmEd Imports
-from chemistry.charmm.openmmloader import (OpenMMCharmmPsfFile as CharmmPsfFile,
-                                           OpenMMCharmmCrdFile as CharmmCrdFile)
-from chemistry.charmm.parameters import CharmmParameterSet
-from chemistry.amber.openmmreporters import (
-            AmberStateDataReporter as AKMAStateDataReporter)
+<span class="c"># ParmEd Imports</span>
+<span class="kn">from</span> <span class="nn">chemistry.charmm.openmmloader</span> <span class="kn">import</span> <span class="p">(</span><span class="n">OpenMMCharmmPsfFile</span> <span class="k">as</span> <span class="n">CharmmPsfFile</span><span class="p">,</span>
+                                           <span class="n">OpenMMCharmmCrdFile</span> <span class="k">as</span> <span class="n">CharmmCrdFile</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">chemistry.charmm.parameters</span> <span class="kn">import</span> <span class="n">CharmmParameterSet</span>
+<span class="kn">from</span> <span class="nn">chemistry.amber.openmmreporters</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">AmberStateDataReporter</span> <span class="k">as</span> <span class="n">AKMAStateDataReporter</span><span class="p">)</span>
 
-# Load the CHARMM files
-print('Loading CHARMM files...')
-params = CharmmParameterSet('toppar/par_all36_prot.prm')
-ala5_gas = CharmmPsfFile('ala5_autopsf.psf')
-ala5_crds = app.PDBFile('ala5_autopsf.pdb')
+<span class="c"># Load the CHARMM files</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Loading CHARMM files...'</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">CharmmParameterSet</span><span class="p">(</span><span class="s">'toppar/par_all36_prot.prm'</span><span class="p">)</span>
+<span class="n">ala5_gas</span> <span class="o">=</span> <span class="n">CharmmPsfFile</span><span class="p">(</span><span class="s">'ala5_autopsf.psf'</span><span class="p">)</span>
+<span class="n">ala5_crds</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">PDBFile</span><span class="p">(</span><span class="s">'ala5_autopsf.pdb'</span><span class="p">)</span>
 
-# Create the OpenMM system
-print('Creating OpenMM System')
-system = ala5_gas.createSystem(params, nonbondedMethod=app.NoCutoff,
-                               constraints=app.HBonds, implicitSolvent=app.HCT,
-                               implicitSolventSaltConc=0.1*u.moles/u.liter,
-)
+<span class="c"># Create the OpenMM system</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Creating OpenMM System'</span><span class="p">)</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">ala5_gas</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">nonbondedMethod</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">NoCutoff</span><span class="p">,</span>
+                               <span class="n">constraints</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">HBonds</span><span class="p">,</span> <span class="n">implicitSolvent</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">HCT</span><span class="p">,</span>
+                               <span class="n">implicitSolventSaltConc</span><span class="o">=</span><span class="mf">0.1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">moles</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">liter</span><span class="p">,</span>
+<span class="p">)</span>
 
-# Create the integrator to do Langevin dynamics
-integrator = mm.LangevinIntegrator(
-                        300*u.kelvin,       # Temperature of heat bath
-                        1.0/u.picoseconds,  # Friction coefficient
-                        2.0*u.femtoseconds, # Time step
-)
+<span class="c"># Create the integrator to do Langevin dynamics</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">LangevinIntegrator</span><span class="p">(</span>
+                        <span class="mi">300</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">kelvin</span><span class="p">,</span>       <span class="c"># Temperature of heat bath</span>
+                        <span class="mf">1.0</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">picoseconds</span><span class="p">,</span>  <span class="c"># Friction coefficient</span>
+                        <span class="mf">2.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">femtoseconds</span><span class="p">,</span> <span class="c"># Time step</span>
+<span class="p">)</span>
 
-# Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify
-# the platform to use the default (fastest) platform
-platform = mm.Platform.getPlatformByName('CUDA')
-prop = dict(CudaPrecision='mixed') # Use mixed single/double precision
+<span class="c"># Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify</span>
+<span class="c"># the platform to use the default (fastest) platform</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">Platform</span><span class="o">.</span><span class="n">getPlatformByName</span><span class="p">(</span><span class="s">'CUDA'</span><span class="p">)</span>
+<span class="n">prop</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">CudaPrecision</span><span class="o">=</span><span class="s">'mixed'</span><span class="p">)</span> <span class="c"># Use mixed single/double precision</span>
 
-# Create the Simulation object
-sim = app.Simulation(ala5_gas.topology, system, integrator, platform, prop)
+<span class="c"># Create the Simulation object</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">ala5_gas</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">integrator</span><span class="p">,</span> <span class="n">platform</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
 
-# Set the particle positions
-sim.context.setPositions(ala5_crds.positions)
+<span class="c"># Set the particle positions</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">setPositions</span><span class="p">(</span><span class="n">ala5_crds</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 
-# Minimize the energy
-print('Minimizing energy')
-sim.minimizeEnergy(maxIterations=500)
+<span class="c"># Minimize the energy</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Minimizing energy'</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">minimizeEnergy</span><span class="p">(</span><span class="n">maxIterations</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-# Set up the reporters to report energies and coordinates every 100 steps
-sim.reporters.append(
-        AKMAStateDataReporter(sys.stdout, 100, step=True, potentialEnergy=True,
-                              kineticEnergy=True, temperature=True,
-                              volume=True, density=True)
-)
-sim.reporters.append(app.DCDReporter('ala5_gb.dcd', 100))
+<span class="c"># Set up the reporters to report energies and coordinates every 100 steps</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">AKMAStateDataReporter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">potentialEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                              <span class="n">kineticEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                              <span class="n">volume</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">DCDReporter</span><span class="p">(</span><span class="s">'ala5_gb.dcd'</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
 
 # Run dynamics
 print('Running dynamics')
@@ -190,91 +190,91 @@ sim.step(10000)
 <a href="ala2_charmmgui.crd">ala2_charmmgui.crd</a> : The input CHARMM coordinate file</li>
 </ul><p>The following sample script (<code>simulate_charmm_gui.py</code> in the ParmEd release) will set up and run the simulation using OpenMM:</p>
 
-<pre><code>#!/usr/bin/env python
-from __future__ import division, print_function
+<div class="highlight highlight-Python"><pre><span class="c">#!/usr/bin/env python</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span><span class="p">,</span> <span class="n">print_function</span>
 
-import sys
+<span class="kn">import</span> <span class="nn">sys</span>
 
-# OpenMM Imports
-import simtk.unit as u
-import simtk.openmm as mm
-import simtk.openmm.app as app
+<span class="c"># OpenMM Imports</span>
+<span class="kn">import</span> <span class="nn">simtk.unit</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm</span> <span class="kn">as</span> <span class="nn">mm</span>
+<span class="kn">import</span> <span class="nn">simtk.openmm.app</span> <span class="kn">as</span> <span class="nn">app</span>
 
-# ParmEd Imports
-from chemistry.charmm.openmmloader import (OpenMMCharmmPsfFile as CharmmPsfFile,
-                                           OpenMMCharmmCrdFile as CharmmCrdFile)
-from chemistry.charmm.parameters import CharmmParameterSet
-from chemistry.amber.openmmreporters import (
-            AmberStateDataReporter as AKMAStateDataReporter)
+<span class="c"># ParmEd Imports</span>
+<span class="kn">from</span> <span class="nn">chemistry.charmm.openmmloader</span> <span class="kn">import</span> <span class="p">(</span><span class="n">OpenMMCharmmPsfFile</span> <span class="k">as</span> <span class="n">CharmmPsfFile</span><span class="p">,</span>
+                                           <span class="n">OpenMMCharmmCrdFile</span> <span class="k">as</span> <span class="n">CharmmCrdFile</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">chemistry.charmm.parameters</span> <span class="kn">import</span> <span class="n">CharmmParameterSet</span>
+<span class="kn">from</span> <span class="nn">chemistry.amber.openmmreporters</span> <span class="kn">import</span> <span class="p">(</span>
+            <span class="n">AmberStateDataReporter</span> <span class="k">as</span> <span class="n">AKMAStateDataReporter</span><span class="p">)</span>
 
-# Load the CHARMM files
-print('Loading CHARMM files...')
-params = CharmmParameterSet('toppar/par_all36_prot.prm',
-                            'toppar/toppar_water_ions.str')
-ala2_solv = CharmmPsfFile('ala2_charmmgui.psf')
-ala2_crds = CharmmCrdFile('ala2_charmmgui.crd')
+<span class="c"># Load the CHARMM files</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Loading CHARMM files...'</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">CharmmParameterSet</span><span class="p">(</span><span class="s">'toppar/par_all36_prot.prm'</span><span class="p">,</span>
+                            <span class="s">'toppar/toppar_water_ions.str'</span><span class="p">)</span>
+<span class="n">ala2_solv</span> <span class="o">=</span> <span class="n">CharmmPsfFile</span><span class="p">(</span><span class="s">'ala2_charmmgui.psf'</span><span class="p">)</span>
+<span class="n">ala2_crds</span> <span class="o">=</span> <span class="n">CharmmCrdFile</span><span class="p">(</span><span class="s">'ala2_charmmgui.crd'</span><span class="p">)</span>
 
-# Compute the box dimensions from the coordinates and set the box lengths (only
-# orthorhombic boxes are currently supported in OpenMM)
-coords = ala2_crds.positions
-min_crds = [coords[0][0], coords[0][1], coords[0][2]]
-max_crds = [coords[0][0], coords[0][1], coords[0][2]]
+<span class="c"># Compute the box dimensions from the coordinates and set the box lengths (only</span>
+<span class="c"># orthorhombic boxes are currently supported in OpenMM)</span>
+<span class="n">coords</span> <span class="o">=</span> <span class="n">ala2_crds</span><span class="o">.</span><span class="n">positions</span>
+<span class="n">min_crds</span> <span class="o">=</span> <span class="p">[</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span>
+<span class="n">max_crds</span> <span class="o">=</span> <span class="p">[</span><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span>
 
-for coord in coords:
-    min_crds[0] = min(min_crds[0], coord[0])
-    min_crds[1] = min(min_crds[1], coord[1])
-    min_crds[2] = min(min_crds[2], coord[2])
-    max_crds[0] = max(max_crds[0], coord[0])
-    max_crds[1] = max(max_crds[1], coord[1])
-    max_crds[2] = max(max_crds[2], coord[2])
+<span class="k">for</span> <span class="n">coord</span> <span class="ow">in</span> <span class="n">coords</span><span class="p">:</span>
+    <span class="n">min_crds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_crds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">min_crds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_crds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">min_crds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_crds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">max_crds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_crds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">max_crds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_crds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">max_crds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_crds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">coord</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-ala2_solv.setBox(max_crds[0]-min_crds[0],
-                 max_crds[1]-min_crds[1],
-                 max_crds[2]-min_crds[2],
-)
+<span class="n">ala2_solv</span><span class="o">.</span><span class="n">setBox</span><span class="p">(</span><span class="n">max_crds</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">min_crds</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                 <span class="n">max_crds</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">min_crds</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                 <span class="n">max_crds</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">-</span><span class="n">min_crds</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span>
+<span class="p">)</span>
 
-# Create the OpenMM system
-print('Creating OpenMM System')
-system = ala2_solv.createSystem(params, nonbondedMethod=app.PME,
-                                nonbondedCutoff=12.0*u.angstroms,
-                                constraints=app.HBonds,
-                                switchDistance=10.0*u.angstroms,
-)
+<span class="c"># Create the OpenMM system</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Creating OpenMM System'</span><span class="p">)</span>
+<span class="n">system</span> <span class="o">=</span> <span class="n">ala2_solv</span><span class="o">.</span><span class="n">createSystem</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">nonbondedMethod</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">PME</span><span class="p">,</span>
+                                <span class="n">nonbondedCutoff</span><span class="o">=</span><span class="mf">12.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">angstroms</span><span class="p">,</span>
+                                <span class="n">constraints</span><span class="o">=</span><span class="n">app</span><span class="o">.</span><span class="n">HBonds</span><span class="p">,</span>
+                                <span class="n">switchDistance</span><span class="o">=</span><span class="mf">10.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">angstroms</span><span class="p">,</span>
+<span class="p">)</span>
 
-# Create the integrator to do Langevin dynamics
-integrator = mm.LangevinIntegrator(
-                        300*u.kelvin,       # Temperature of heat bath
-                        1.0/u.picoseconds,  # Friction coefficient
-                        2.0*u.femtoseconds, # Time step
-)
+<span class="c"># Create the integrator to do Langevin dynamics</span>
+<span class="n">integrator</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">LangevinIntegrator</span><span class="p">(</span>
+                        <span class="mi">300</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">kelvin</span><span class="p">,</span>       <span class="c"># Temperature of heat bath</span>
+                        <span class="mf">1.0</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">picoseconds</span><span class="p">,</span>  <span class="c"># Friction coefficient</span>
+                        <span class="mf">2.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">femtoseconds</span><span class="p">,</span> <span class="c"># Time step</span>
+<span class="p">)</span>
 
-# Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify
-# the platform to use the default (fastest) platform
-platform = mm.Platform.getPlatformByName('CUDA')
-prop = dict(CudaPrecision='mixed') # Use mixed single/double precision
+<span class="c"># Define the platform to use; CUDA, OpenCL, CPU, or Reference. Or do not specify</span>
+<span class="c"># the platform to use the default (fastest) platform</span>
+<span class="n">platform</span> <span class="o">=</span> <span class="n">mm</span><span class="o">.</span><span class="n">Platform</span><span class="o">.</span><span class="n">getPlatformByName</span><span class="p">(</span><span class="s">'CUDA'</span><span class="p">)</span>
+<span class="n">prop</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">CudaPrecision</span><span class="o">=</span><span class="s">'mixed'</span><span class="p">)</span> <span class="c"># Use mixed single/double precision</span>
 
-# Create the Simulation object
-sim = app.Simulation(ala2_solv.topology, system, integrator, platform, prop)
+<span class="c"># Create the Simulation object</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">Simulation</span><span class="p">(</span><span class="n">ala2_solv</span><span class="o">.</span><span class="n">topology</span><span class="p">,</span> <span class="n">system</span><span class="p">,</span> <span class="n">integrator</span><span class="p">,</span> <span class="n">platform</span><span class="p">,</span> <span class="n">prop</span><span class="p">)</span>
 
-# Set the particle positions
-sim.context.setPositions(ala2_crds.positions)
+<span class="c"># Set the particle positions</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">setPositions</span><span class="p">(</span><span class="n">ala2_crds</span><span class="o">.</span><span class="n">positions</span><span class="p">)</span>
 
-# Minimize the energy
-print('Minimizing energy')
-sim.minimizeEnergy(maxIterations=500)
+<span class="c"># Minimize the energy</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Minimizing energy'</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">minimizeEnergy</span><span class="p">(</span><span class="n">maxIterations</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
 
-# Set up the reporters to report energies and coordinates every 100 steps
-sim.reporters.append(
-        AKMAStateDataReporter(sys.stdout, 100, step=True, potentialEnergy=True,
-                              kineticEnergy=True, temperature=True,
-                              volume=True, density=True)
-)
-sim.reporters.append(app.DCDReporter('ala2_solv.dcd', 100))
+<span class="c"># Set up the reporters to report energies and coordinates every 100 steps</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">AKMAStateDataReporter</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">potentialEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                              <span class="n">kineticEnergy</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                              <span class="n">volume</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">reporters</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">app</span><span class="o">.</span><span class="n">DCDReporter</span><span class="p">(</span><span class="s">'ala2_solv.dcd'</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
 
-# Run dynamics
-print('Running dynamics')
-sim.step(10000)
-</code></pre>
+<span class="c"># Run dynamics</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'Running dynamics'</span><span class="p">)</span>
+<span class="n">sim</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
 
 <p>Now we'll dissect the script to help you understand what is happening at each step.  We will divide the script into the sections following the <code>print</code> statements that announce when each stage begins.</p>
 
@@ -301,15 +301,11 @@ sim.step(10000)
 <li>
 <code>nonbondedMethod=app.PME</code> indicates we want to include the full electrostatic interactions using the Particle Mesh Ewald method</li>
 <li>
-<code>nonbondedCutoff=12.0*u.angstroms</code> indicates we want to truncate van
-der Waals interactions and the direct-space sum in PME to 12 angstroms. This is
-equivalent to the <i>ctofnb</i> parameter in CHARMM</li>
+<code>nonbondedCutoff=12.0*u.angstroms</code> indicates we want to truncate van der Waals interactions and the direct-space sum in PME to 12 angstroms. (This is equivalent to the <em>ctofnb</em> parameter in CHARMM)</li>
 <li>
 <code>constraints=app.HBonds</code> indicates that we want to constrain all bonds in which at least one atom is hydrogen</li>
 <li>
-<code>switchDistance=10.0*u.angstroms</code> indicates we want to turn on a
-sigmoidal switching function for van der Waals interactions at 10 Angstroms.
-This is equivalent to the <i>ctonnb</i> parameter in CHARMM.</li>
+<code>switchDistance=10.0*u.angstroms</code> indicates that we want to turn the switching function <em>on</em> at 10 Angstroms (This is equivalent to the <em>ctonnb</em> parameter in CHARMM)</li>
 </ul><p>See the API documentation for the <code>chemistry</code> package (<a href="../../chemistry/chemistry.charmm.html#module-chemistry.charmm.openmmloader">available here</a>) for a full listing of available options (such as using a switching function for van der Waals interactions with the <code>switchDistance</code> keyword).  If there are any other force objects you want to define, they can be added to the system after this step (like, for instance, positional restraints to a reference structure).</p>
 
 <h3>
