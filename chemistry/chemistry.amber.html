@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,21 +8,21 @@
     
     <title>chemistry.amber package &mdash; ParmEd 1.0 documentation</title>
     
-    <link rel="stylesheet" href="styles/default.css" type="text/css" />
-    <link rel="stylesheet" href="styles/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="styles/jquery.js"></script>
-    <script type="text/javascript" src="styles/underscore.js"></script>
-    <script type="text/javascript" src="styles/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="ParmEd 1.0 documentation" href="index.html" /> 
   </head>
   <body>
@@ -68,7 +66,7 @@ encouraged, but these are provided for more complete compatibility and for
 instances where the prequisites may not be installed.</p>
 <dl class="class">
 <dt id="chemistry.amber.asciicrd.AmberAsciiRestart">
-<em class="property">class </em><tt class="descclassname">chemistry.amber.asciicrd.</tt><tt class="descname">AmberAsciiRestart</tt><big>(</big><em>fname</em>, <em>mode='r'</em>, <em>natom=0</em>, <em>hasbox=None</em>, <em>title=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">chemistry.amber.asciicrd.</tt><tt class="descname">AmberAsciiRestart</tt><big>(</big><em>fname</em>, <em>mode='r'</em>, <em>natom=0</em>, <em>hasbox=None</em>, <em>title=None</em>, <em>time=0.0</em><big>)</big><a class="headerlink" href="#chemistry.amber.asciicrd.AmberAsciiRestart" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.asciicrd._AmberAsciiCoordinateFile</span></tt></p>
 <dl class="attribute">
 <dt id="chemistry.amber.asciicrd.AmberAsciiRestart.CRDS_PER_LINE">
@@ -225,6 +223,11 @@ package does should be contained in this module.</p>
 <dl class="attribute">
 <dt id="chemistry.amber.netcdffiles.NetCDFRestart.coordinates">
 <tt class="descname">coordinates</tt><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.coordinates" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFRestart.flush">
+<tt class="descname">flush</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFRestart.flush" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="classmethod">
@@ -402,6 +405,18 @@ constructor.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.box">
+<tt class="descname">box</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.box" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the cell lengths and angles as one array</p>
+<dl class="docutils">
+<dt>frame <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>Frame to get the box from</dd>
+</dl>
+<blockquote>
+<div>6-element array with 3 lengths followed by 3 angles (in degrees)</div></blockquote>
+</dd></dl>
+
+<dl class="method">
 <dt id="chemistry.amber.netcdffiles.NetCDFTraj.cell_lengths_angles">
 <tt class="descname">cell_lengths_angles</tt><big>(</big><em>frame</em><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.cell_lengths_angles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the cell lengths and cell angles of a particular frame in the
@@ -438,6 +453,11 @@ numpy array of cell angles)</dd>
 <dd>numpy array of length 3*natom with the given coordinates</dd>
 </dl>
 </dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.netcdffiles.NetCDFTraj.flush">
+<tt class="descname">flush</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.netcdffiles.NetCDFTraj.flush" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="chemistry.amber.netcdffiles.NetCDFTraj.forces">
@@ -606,7 +626,7 @@ the ParmEd API while also being compatible with OpenMM&#8217;s environment</p>
 
 <dl class="method">
 <dt id="chemistry.amber.openmmloader.OpenMMAmberParm.createSystem">
-<tt class="descname">createSystem</tt><big>(</big><em>nonbondedMethod=NoCutoff</em>, <em>nonbondedCutoff=Quantity(value=1.0</em>, <em>unit=nanometer)</em>, <em>constraints=None</em>, <em>rigidWater=True</em>, <em>implicitSolvent=None</em>, <em>implicitSolventKappa=None</em>, <em>implicitSolventSaltConc=Quantity(value=0.0</em>, <em>unit=mole/liter)</em>, <em>temperature=Quantity(value=298.15</em>, <em>unit=kelvin)</em>, <em>soluteDielectric=1.0</em>, <em>solventDielectric=78.5</em>, <em>removeCMMotion=True</em>, <em>hydrogenMass=None</em>, <em>ewaldErrorTolerance=0.0005</em>, <em>flexibleConstraints=True</em>, <em>verbose=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.createSystem" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">createSystem</tt><big>(</big><em>nonbondedMethod=NoCutoff</em>, <em>nonbondedCutoff=Quantity(value=1.0</em>, <em>unit=nanometer)</em>, <em>constraints=None</em>, <em>rigidWater=True</em>, <em>implicitSolvent=None</em>, <em>implicitSolventKappa=None</em>, <em>implicitSolventSaltConc=Quantity(value=0.0</em>, <em>unit=mole/liter)</em>, <em>temperature=Quantity(value=298.15</em>, <em>unit=kelvin)</em>, <em>soluteDielectric=1.0</em>, <em>solventDielectric=78.5</em>, <em>removeCMMotion=True</em>, <em>hydrogenMass=None</em>, <em>ewaldErrorTolerance=0.0005</em>, <em>flexibleConstraints=True</em>, <em>verbose=False</em>, <em>forceNBFIX=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMAmberParm.createSystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct an OpenMM System representing the topology described by the
 prmtop file.</p>
 <dl class="docutils">
@@ -697,6 +717,13 @@ heavy atom to keep their total mass the same.</p>
 <li><p class="first">flexibleConstraints (bool=True) Are our constraints flexible or not?</p>
 </li>
 <li><p class="first">verbose (bool=False) Optionally prints out a running progress report</p>
+</li>
+<li><dl class="first docutils">
+<dt>forceNBFIX (bool=False) Debugging option used to force all systems</dt>
+<dd><p class="first last">to follow the NBFIX code path. When NBFIX is not needed, the
+resulting system will run significantly slower with this option</p>
+</dd>
+</dl>
 </li>
 </ul>
 </dd>
@@ -803,7 +830,7 @@ the ParmEd API while also being compatible with OpenMM&#8217;s environment</p>
 
 <dl class="method">
 <dt id="chemistry.amber.openmmloader.OpenMMChamberParm.createSystem">
-<tt class="descname">createSystem</tt><big>(</big><em>nonbondedMethod=NoCutoff</em>, <em>nonbondedCutoff=Quantity(value=1.0</em>, <em>unit=nanometer)</em>, <em>constraints=None</em>, <em>rigidWater=True</em>, <em>implicitSolvent=None</em>, <em>implicitSolventKappa=None</em>, <em>implicitSolventSaltConc=Quantity(value=0.0</em>, <em>unit=mole/liter)</em>, <em>temperature=Quantity(value=298.15</em>, <em>unit=kelvin)</em>, <em>soluteDielectric=1.0</em>, <em>solventDielectric=78.5</em>, <em>removeCMMotion=True</em>, <em>hydrogenMass=None</em>, <em>ewaldErrorTolerance=0.0005</em>, <em>flexibleConstraints=True</em>, <em>verbose=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.createSystem" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">createSystem</tt><big>(</big><em>nonbondedMethod=NoCutoff</em>, <em>nonbondedCutoff=Quantity(value=1.0</em>, <em>unit=nanometer)</em>, <em>switchDistance=Quantity(value=0.0</em>, <em>unit=nanometer)</em>, <em>constraints=None</em>, <em>rigidWater=True</em>, <em>implicitSolvent=None</em>, <em>implicitSolventKappa=None</em>, <em>implicitSolventSaltConc=Quantity(value=0.0</em>, <em>unit=mole/liter)</em>, <em>temperature=Quantity(value=298.15</em>, <em>unit=kelvin)</em>, <em>soluteDielectric=1.0</em>, <em>solventDielectric=78.5</em>, <em>removeCMMotion=True</em>, <em>hydrogenMass=None</em>, <em>ewaldErrorTolerance=0.0005</em>, <em>flexibleConstraints=True</em>, <em>verbose=False</em>, <em>forceNBFIX=False</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmloader.OpenMMChamberParm.createSystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct an OpenMM System representing the topology described by the
 prmtop file.</p>
 <dl class="docutils">
@@ -819,6 +846,15 @@ CutoffPeriodic, Ewald, or PME.</p>
 <li><dl class="first docutils">
 <dt>nonbondedCutoff (distance=1*nanometer) The cutoff distance to use</dt>
 <dd><p class="first last">for nonbonded interactions.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>switchDistance (distance=0*nanometer) The distance at which the</dt>
+<dd><p class="first last">switching function is active for van der Waals interactions. If
+the switchDistance evaluates to boolean False (e.g., if it is 0),
+no switching function will be used. Illegal values raise a
+ValueError</p>
 </dd>
 </dl>
 </li>
@@ -895,6 +931,13 @@ heavy atom to keep their total mass the same.</p>
 </li>
 <li><p class="first">verbose (bool=False) Optionally prints out a running progress report</p>
 </li>
+<li><dl class="first docutils">
+<dt>forceNBFIX (bool=False) Debugging option used to force all systems</dt>
+<dd><p class="first last">to follow the NBFIX code path. When NBFIX is not needed, the
+resulting system will run significantly slower with this option</p>
+</dd>
+</dl>
+</li>
 </ul>
 </dd>
 </dl>
@@ -969,6 +1012,45 @@ implements the desired &#8216;write&#8217; attribute.</li>
 </div></blockquote>
 <p>Most of this code is copied from the OpenMM StateDataReporter class, with
 the above-mentioned changes made.</p>
+<dl class="docutils">
+<dt>f <span class="classifier-delimiter">:</span> <span class="classifier">str or file-like</span></dt>
+<dd>Destination to write the state data (file name or file object)</dd>
+<dt>reportInterval <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>Number of steps between state data reports</dd>
+<dt>step <span class="classifier-delimiter">:</span> <span class="classifier">bool=True</span></dt>
+<dd>Print out the step number</dd>
+<dt>time <span class="classifier-delimiter">:</span> <span class="classifier">bool=True</span></dt>
+<dd>Print out the simulation time</dd>
+<dt>potentialEnergy <span class="classifier-delimiter">:</span> <span class="classifier">bool=True</span></dt>
+<dd>Print out the potential energy of the structure</dd>
+<dt>kineticEnergy <span class="classifier-delimiter">:</span> <span class="classifier">bool=True</span></dt>
+<dd>Print out the kinetic energy of the structure</dd>
+<dt>totalEnergy <span class="classifier-delimiter">:</span> <span class="classifier">bool=True</span></dt>
+<dd>Print out the total energy of the system</dd>
+<dt>temperature <span class="classifier-delimiter">:</span> <span class="classifier">bool=True</span></dt>
+<dd>Print out the temperature of the system</dd>
+<dt>volume <span class="classifier-delimiter">:</span> <span class="classifier">bool=False</span></dt>
+<dd>Print out the volume of the unit cell. If the system is not periodic,
+the value is meaningless</dd>
+<dt>density <span class="classifier-delimiter">:</span> <span class="classifier">bool=False</span></dt>
+<dd>Print out the density of the unit cell. If the system is not periodic,
+the value is meaningless</dd>
+<dt>separator <span class="classifier-delimiter">:</span> <span class="classifier">str=&#8217;,&#8217;</span></dt>
+<dd>The string to separate data fields</dd>
+<dt>systemMass <span class="classifier-delimiter">:</span> <span class="classifier">float=None</span></dt>
+<dd>If not None, the density will be computed from this mass, since setting
+a mass to 0 is used to constrain the position of that particle</dd>
+<dt>energyUnit <span class="classifier-delimiter">:</span> <span class="classifier">unit=kilocalories_per_mole</span></dt>
+<dd>The unit to print energies in</dd>
+<dt>temperatureUnit <span class="classifier-delimiter">:</span> <span class="classifier">unit=kelvin</span></dt>
+<dd>The unit to print temperature in</dd>
+<dt>volumeUnit <span class="classifier-delimiter">:</span> <span class="classifier">unit=angstrom**3</span></dt>
+<dd>The unit to print volumes in</dd>
+<dt>densityUnit <span class="classifier-delimiter">:</span> <span class="classifier">unit=grams/item/milliliter</span></dt>
+<dd>The unit to print densities in</dd>
+<dt>timeUnit <span class="classifier-delimiter">:</span> <span class="classifier">unit=picosecond</span></dt>
+<dd>The unit to print times in</dd>
+</dl>
 <dl class="method">
 <dt id="chemistry.amber.openmmreporters.AmberStateDataReporter.describeNextReport">
 <tt class="descname">describeNextReport</tt><big>(</big><em>simulation</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.AmberStateDataReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
@@ -985,6 +1067,12 @@ until the next report.  The remaining elements specify whether that
 report will require positions, velocities, forces, and energies
 respectively.</dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.AmberStateDataReporter.finalize">
+<tt class="descname">finalize</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.AmberStateDataReporter.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes any open file</p>
 </dd></dl>
 
 <dl class="method">
@@ -1005,7 +1093,7 @@ respectively.</dd>
 
 <dl class="class">
 <dt id="chemistry.amber.openmmreporters.EnergyMinimizerReporter">
-<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">EnergyMinimizerReporter</tt><big>(</big><em>f</em>, <em>volume=False</em>, <em>energyUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;amount&quot;)</em>, <em>name=&quot;mole&quot;</em>, <em>symbol=&quot;mol&quot;): -1.0</em>, <em>ScaledUnit(factor=4.184</em>, <em>master=kilojoule</em>, <em>name='kilocalorie'</em>, <em>symbol='kcal'): 1.0})</em>, <em>volumeUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;length&quot;)</em>, <em>name=&quot;angstrom&quot;</em>, <em>symbol=&quot;A&quot;): 3.0})</em>, <em>densityUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;mass&quot;)</em>, <em>name=&quot;gram&quot;</em>, <em>symbol=&quot;g&quot;): 1.0</em>, <em>ScaledUnit(factor=0.001</em>, <em>master=decimeter**3</em>, <em>name='milliliter'</em>, <em>symbol='mL'): -1.0</em>, <em>BaseUnit(base_dim=BaseDimension(&quot;amount&quot;)</em>, <em>name=&quot;item&quot;</em>, <em>symbol=&quot;&quot;): -1.0})</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.EnergyMinimizerReporter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">EnergyMinimizerReporter</tt><big>(</big><em>f</em>, <em>volume=False</em>, <em>energyUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;amount&quot;)</em>, <em>name=&quot;mole&quot;</em>, <em>symbol=&quot;mol&quot;): -1.0</em>, <em>ScaledUnit(factor=4.184</em>, <em>master=kilojoule</em>, <em>name='kilocalorie'</em>, <em>symbol='kcal'): 1.0})</em>, <em>volumeUnit=Unit({BaseUnit(base_dim=BaseDimension(&quot;length&quot;)</em>, <em>name=&quot;angstrom&quot;</em>, <em>symbol=&quot;A&quot;): 3.0})</em>, <em>densityUnit=Unit({ScaledUnit(factor=0.001</em>, <em>master=decimeter**3</em>, <em>name='milliliter'</em>, <em>symbol='mL'): -1.0</em>, <em>BaseUnit(base_dim=BaseDimension(&quot;mass&quot;)</em>, <em>name=&quot;gram&quot;</em>, <em>symbol=&quot;g&quot;): 1.0</em>, <em>BaseUnit(base_dim=BaseDimension(&quot;amount&quot;)</em>, <em>name=&quot;item&quot;</em>, <em>symbol=&quot;&quot;): -1.0})</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.EnergyMinimizerReporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#chemistry.amber.openmmreporters.AmberStateDataReporter" title="chemistry.amber.openmmreporters.AmberStateDataReporter"><tt class="xref py py-class docutils literal"><span class="pre">chemistry.amber.openmmreporters.AmberStateDataReporter</span></tt></a></p>
 <p>This class acts as a simple energy reporter class for minimizations. This
 is not meant to be used as a reporter for OpenMM&#8217;s molecular dynamics
@@ -1015,6 +1103,12 @@ single-point energies.</p>
 <dt id="chemistry.amber.openmmreporters.EnergyMinimizerReporter.describeNextReport">
 <tt class="descname">describeNextReport</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.EnergyMinimizerReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Disable this reporter inside MD</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.EnergyMinimizerReporter.finalize">
+<tt class="descname">finalize</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.EnergyMinimizerReporter.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes any open file</p>
 </dd></dl>
 
 <dl class="method">
@@ -1048,6 +1142,12 @@ until the next report.  The remaining elements specify whether that
 report will require positions, velocities, forces, and energies
 respectively.</dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.MdcrdReporter.finalize">
+<tt class="descname">finalize</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.MdcrdReporter.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes any open file</p>
 </dd></dl>
 
 <dl class="method">
@@ -1087,6 +1187,12 @@ until the next report.  The remaining elements specify whether that
 report will require positions, velocities, forces, and energies
 respectively.</dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.NetCDFReporter.finalize">
+<tt class="descname">finalize</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.NetCDFReporter.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes any open file</p>
 </dd></dl>
 
 <dl class="method">
@@ -1143,6 +1249,21 @@ current/overall MD performance)</p>
 <em class="property">class </em><tt class="descclassname">chemistry.amber.openmmreporters.</tt><tt class="descname">RestartReporter</tt><big>(</big><em>*args</em>, <em>**kwargs</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.RestartReporter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>Use a reporter to handle writing restarts at specified intervals.</p>
+<dl class="docutils">
+<dt>file <span class="classifier-delimiter">:</span> <span class="classifier">str</span></dt>
+<dd>Name of the file to write the restart to.</dd>
+<dt>reportInterval <span class="classifier-delimiter">:</span> <span class="classifier">int</span></dt>
+<dd>Number of steps between writing restart files</dd>
+<dt>write_multiple <span class="classifier-delimiter">:</span> <span class="classifier">bool=False</span></dt>
+<dd>Either write a separate restart each time (appending the step number in
+the format .# to the file name given above) if True, or overwrite the
+same file each time if False</dd>
+<dt>netcdf <span class="classifier-delimiter">:</span> <span class="classifier">bool=False</span></dt>
+<dd>Use the Amber NetCDF restart file format</dd>
+<dt>write_velocities <span class="classifier-delimiter">:</span> <span class="classifier">bool=True</span></dt>
+<dd>Write velocities to the restart file. You can turn this off for passing
+in, for instance, a minimized structure.</dd>
+</dl>
 <dl class="method">
 <dt id="chemistry.amber.openmmreporters.RestartReporter.describeNextReport">
 <tt class="descname">describeNextReport</tt><big>(</big><em>simulation</em><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.RestartReporter.describeNextReport" title="Permalink to this definition">¶</a></dt>
@@ -1159,6 +1280,12 @@ until the next report.  The remaining elements specify whether that
 report will require positions, velocities, forces, and energies
 respectively.</dd>
 </dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="chemistry.amber.openmmreporters.RestartReporter.finalize">
+<tt class="descname">finalize</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.openmmreporters.RestartReporter.finalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>No-op here</p>
 </dd></dl>
 
 <dl class="method">
@@ -1215,7 +1342,7 @@ about Amber topology files specifically</p>
 
 <dl class="method">
 <dt id="chemistry.amber.readparm.AmberFormat.addFlag">
-<tt class="descname">addFlag</tt><big>(</big><em>flag_name</em>, <em>flag_format</em>, <em>data=None</em>, <em>num_items=-1</em>, <em>comments=</em><span class="optional">[</span><span class="optional">]</span>, <em>after=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.addFlag" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">addFlag</tt><big>(</big><em>flag_name</em>, <em>flag_format</em>, <em>data=None</em>, <em>num_items=-1</em>, <em>comments=</em>, <span class="optional">[</span><span class="optional">]</span><em>after=None</em><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.AmberFormat.addFlag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a new flag with the given flag name and Fortran format string and
 initializes the array with the values given, or as an array of 0s
 of length num_items</p>
@@ -1491,12 +1618,6 @@ access to topology data.</p>
 key being the pointer name according to <a class="reference external" href="http://ambermd.org/formats.html">http://ambermd.org/formats.html</a></p>
 </dd></dl>
 
-<dl class="method">
-<dt id="chemistry.amber.readparm.ChamberParm.ToMolecule">
-<tt class="descname">ToMolecule</tt><big>(</big><big>)</big><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.ToMolecule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Translates an amber system into a molecule format</p>
-</dd></dl>
-
 <dl class="attribute">
 <dt id="chemistry.amber.readparm.ChamberParm.amoeba">
 <tt class="descname">amoeba</tt><a class="headerlink" href="#chemistry.amber.readparm.ChamberParm.amoeba" title="Permalink to this definition">¶</a></dt>
@@ -1645,9 +1766,7 @@ instance</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">chemistry.amber package</a><ul>
-<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-</ul>
-</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 <li><a class="reference internal" href="#module-chemistry.amber.asciicrd">chemistry.amber.asciicrd module</a></li>
 <li><a class="reference internal" href="#module-chemistry.amber.mask">chemistry.amber.mask module</a></li>
@@ -1662,7 +1781,7 @@ instance</p>
 
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="sources/chemistry.amber.txt"
+    <li><a href="_sources/chemistry.amber.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -1696,7 +1815,7 @@ instance</p>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Jason Swails.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>

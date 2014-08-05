@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,21 +8,21 @@
     
     <title>chemistry.charmm package &mdash; ParmEd 1.0 documentation</title>
     
-    <link rel="stylesheet" href="styles/default.css" type="text/css" />
-    <link rel="stylesheet" href="styles/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="styles/jquery.js"></script>
-    <script type="text/javascript" src="styles/underscore.js"></script>
-    <script type="text/javascript" src="styles/doctools.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="ParmEd 1.0 documentation" href="index.html" /> 
   </head>
   <body>
@@ -414,7 +412,7 @@ topology, and stream files. It only extracts atom properties from the
 topology files and extracts all parameters from the parameter files</p>
 <p>Author: Jason M. Swails
 Contributors:
-Date: April 5, 2014</p>
+Date: July 17, 2014</p>
 <dl class="class">
 <dt id="chemistry.charmm.parameters.CharmmParameterSet">
 <em class="property">class </em><tt class="descclassname">chemistry.charmm.parameters.</tt><tt class="descname">CharmmParameterSet</tt><big>(</big><em>*args</em><big>)</big><a class="headerlink" href="#chemistry.charmm.parameters.CharmmParameterSet" title="Permalink to this definition">¶</a></dt>
@@ -423,6 +421,24 @@ Date: April 5, 2014</p>
 the information found in the MASS section of the CHARMM topology file
 (TOP/RTF) and all of the information in the parameter files (PAR)</p>
 <dl class="docutils">
+<dt>Parameters:</dt>
+<dd><ul class="first last">
+<li><p class="first">filenames : List of topology, parameter, and stream files to load into
+the parameter set. The following file type suffixes are recognized.
+Unrecognized file types raise a TypeError</p>
+<blockquote>
+<div><p>.rtf, .top &#8211; Residue topology file
+.par, .prm &#8211; Parameter file
+.str &#8211; Stream file
+.inp &#8211; If &#8220;par&#8221; is in the file name, it is a parameter file. If</p>
+<blockquote>
+<div><p>&#8220;top&#8221; is in the file name, it is a topology file. Otherwise,
+raise TypeError</p>
+</div></blockquote>
+</div></blockquote>
+</li>
+</ul>
+</dd>
 <dt>Attributes:</dt>
 <dd><p class="first">All type lists are dictionaries whose keys are tuples (with however
 many elements are needed to define that type of parameter). The types
@@ -446,24 +462,6 @@ the atom type. The tuple is guaranteed to be the most robust, although
 when only the integer or string is available the other dictionaries are
 helpful</p>
 </dd>
-<dt>Parameters:</dt>
-<dd><ul class="first last">
-<li><dl class="first docutils">
-<dt>filenames <span class="classifier-delimiter">:</span> <span class="classifier">Load all of the parameter, topology, and stream files</span></dt>
-<dd><p class="first">into the parameter set. The following file type suffixes are
-recognized. Unrecognized file types raise a TypeError
-.rtf, .top &#8211; Residue Topology file
-.par, .prm &#8211; Parameter file
-.str &#8211; stream file
-.inp &#8211; If &#8220;par&#8221; is in the file name, it is a parameter file. If</p>
-<blockquote class="last">
-<div><p>&#8220;top&#8221; is in the file name, it is a topology file</p>
-</div></blockquote>
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
 </dl>
 <dl class="method">
 <dt id="chemistry.charmm.parameters.CharmmParameterSet.condense">
@@ -483,7 +481,7 @@ in the type mapping dictionaries that points to the equivalent type</p>
 time.</dd>
 </dl>
 <p>Example:
-&gt;&gt;&gt; params = CharmmParameterSet.load_set(pfile=&#8217;charmm.prm&#8217;).condense()</p>
+&gt;&gt;&gt; params = CharmmParameterSet(&#8216;charmm.prm&#8217;).condense()</p>
 </dd></dl>
 
 <dl class="classmethod">
@@ -592,6 +590,7 @@ this structure, including atoms, bonds, torsions, etc. The attributes are</p>
 <li>bond_list</li>
 <li>angle_list</li>
 <li>dihedral_list</li>
+<li>dihedral_parameter_list</li>
 <li>improper_list</li>
 <li>cmap_list</li>
 <li>donor_list    # hbonds donors?</li>
@@ -795,7 +794,7 @@ field parameter files</p>
 
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="sources/chemistry.charmm.txt"
+    <li><a href="_sources/chemistry.charmm.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -829,7 +828,7 @@ field parameter files</p>
     </div>
     <div class="footer">
         &copy; Copyright 2014, Jason Swails.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
     </div>
   </body>
 </html>
